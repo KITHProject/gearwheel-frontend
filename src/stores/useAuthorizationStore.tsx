@@ -1,14 +1,8 @@
+import { AuthorizationStoreState } from '@/types/authorization.types'
 import create from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-type AuthorizationStoreState = {
-  authorized: boolean
-  username: string
-  loginUser: (userName: string, password: string) => void
-  logoutUser: () => void
-  setUsername: (name: string) => void
-  setAuthorized: (flag: boolean) => void
-}
+
 export const useAuthorizationStore = create<AuthorizationStoreState>()(
   immer((set) => ({
     username: '',
@@ -24,7 +18,8 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(
     },
     logoutUser: () => {
       set((state) => {
-        state.authorized = false
+        state.username = ''
+        state.authorized = false 
       })
     },
     setUsername: (name) => {
