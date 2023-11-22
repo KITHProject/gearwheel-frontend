@@ -1,6 +1,7 @@
 import { AuthorizationStoreState } from "@/types/authorization.types";
-import create from "zustand";
+import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { toast } from "src/components/ui/use-toast";
 
 export const useAuthorizationStore = create<AuthorizationStoreState>()(
   immer((set) => ({
@@ -9,6 +10,11 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(
     loginUser: async (username, password) => {
       set((state) => {
         if (username !== "admin" || password !== "haslo123") {
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "There was a problem with your request.",
+          });
           return;
         }
         state.authorized = true;

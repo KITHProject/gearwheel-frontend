@@ -1,33 +1,29 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
-import { Button } from "./components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-} from "./components/ui/card";
-import {
-  loginUser,
-  logoutUser,
-  useAuthorizationStore,
-} from "./stores/useAuthorizationStore";
-import LoginPanel from "./pages/LoginPanel";
+import { useAuthorizationStore } from "./stores/useAuthorizationStore";
+import LoginPage from "./pages/LoginPage";
 import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TestPage from "./pages/TestPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const App = () => {
   const authorized = useAuthorizationStore((state) => state.authorized);
   return (
     <>
-      {authorized ? (
-        <>
-          <Home />
-        </>
-      ) : (
-        <>
-          <LoginPanel />
-        </>
-      )}
+      <BrowserRouter>
+        <Routes>
+          {authorized ? (
+            <>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/test" element={<TestPage />}></Route>
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<LoginPage />}></Route>
+            </>
+          )}
+          <Route path="*" element={<ErrorPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
