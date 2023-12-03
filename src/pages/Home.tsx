@@ -7,9 +7,19 @@ import {
 import { Cog } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useGetStaffUsers } from "@/actions/get-staff-users";
+import LoadingSpinner from "@/components/ui/loading-spinner";
 
-function LoginPanel() {
+function Home() {
   const username = useAuthorizationStore((state) => state.username);
+  const {
+    data: staffUsersData,
+    isLoading: isLoadingStaffUsers,
+    error: errorStaffUsers,
+    refetch: refetchStaffUsers,
+  } = useGetStaffUsers();
+
+  console.log(staffUsersData);
 
   return (
     <div className="flex-col md:flex">
@@ -44,10 +54,19 @@ function LoginPanel() {
       <ul className="flex justify-center items-center">
         <li>
           <Link to="/test"> Go to Test Page</Link>
+          <Button
+            size="sm"
+            variant="default"
+            onClick={() => {
+              refetchStaffUsers();
+            }}
+          >
+            {isLoadingStaffUsers ? <LoadingSpinner /> : "Get users"}
+          </Button>
         </li>
       </ul>
     </div>
   );
 }
 
-export default LoginPanel;
+export default Home;

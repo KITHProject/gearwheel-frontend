@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 
 import { useState } from "react";
 import { registerFormSchema } from "@/types/form-schemas";
+import { register } from "@/actions/post-register";
+import { toast } from "./ui/use-toast";
 
 export function RegisterForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,13 +31,26 @@ export function RegisterForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerFormSchema>) {
+  async function onSubmit(data: z.infer<typeof registerFormSchema>) {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      // loginUser(values.username, values.password);
-    }, 1000);
-    console.log(values);
+    register(data)
+      .then(() => {
+        setIsLoading(false);
+        toast({
+          variant: "default",
+          title: "Successful Register",
+          description: `Have fun!`,
+        });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `There was a problem with your request (${error.message}).`,
+        });
+        console.log(error);
+      });
   }
 
   return (

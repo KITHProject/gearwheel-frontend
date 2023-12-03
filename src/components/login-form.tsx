@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { loginFormSchema } from "@/types/form-schemas";
 import { Eye, EyeOff } from "lucide-react";
-import { login } from "@/actions/post-authorization";
+import { login } from "@/actions/post-login";
 import { setAuthorized, setUsername } from "@/stores/useAuthorizationStore";
 import { toast } from "./ui/use-toast";
 
@@ -29,36 +29,31 @@ export function LoginForm() {
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       username: "",
-      email: "",
       password: "",
     },
   });
 
   async function onSubmit(data: z.infer<typeof loginFormSchema>) {
-    try {
-      setIsLoading(true);
-      login(data)
-        .then(() => {
-          setIsLoading(false);
-          setUsername(data.username);
-          setAuthorized(true);
-          toast({
-            variant: "default",
-            title: "Successful login",
-            description: `Have fun!`,
-          });
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description: `There was a problem with your request. ${error}`,
-          });
+    setIsLoading(true);
+    login(data)
+      .then(() => {
+        setIsLoading(false);
+        setUsername(data.username);
+        setAuthorized(true);
+        toast({
+          variant: "default",
+          title: "Successful login",
+          description: `Have fun!`,
         });
-    } catch (error) {
-      console.log(error);
-    }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `There was a problem with your request (${error.message}).`,
+        });
+      });
   }
 
   return (
@@ -77,19 +72,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input required placeholder="yourname@email.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         <FormField
           control={form.control}
           name="password"

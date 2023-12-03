@@ -15,6 +15,7 @@ api.interceptors.response.use(
 
   function (error) {
     console.error("Error", error);
+    return Promise.reject(error);
   }
 );
 

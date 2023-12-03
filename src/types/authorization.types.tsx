@@ -1,11 +1,14 @@
 export type LoginInput = {
   username: string;
-  email: string;
   password: string;
+};
+
+export type RegisterInput = LoginInput & {
+  email: string;
+  password2: string;
 };
 export type AuthorizationStoreState = {
   username: string;
-  email: string;
   authorized: boolean;
   logoutUser: () => void;
   setUsername: (name: string) => void;
