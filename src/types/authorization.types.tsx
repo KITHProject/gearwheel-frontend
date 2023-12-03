@@ -1,7 +1,12 @@
-export type AuthorizationStoreState = {
-  authorized: boolean;
+export type LoginInput = {
   username: string;
-  loginUser: (username: string, password: string) => void;
+  email: string;
+  password: string;
+};
+export type AuthorizationStoreState = {
+  username: string;
+  email: string;
+  authorized: boolean;
   logoutUser: () => void;
   setUsername: (name: string) => void;
   setAuthorized: (flag: boolean) => void;

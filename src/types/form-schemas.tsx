@@ -32,6 +32,10 @@ export const loginFormSchema = z.object({
       message: "Username must be at least 3 characters.",
     })
     .max(30),
+  email: z
+    .string()
+
+    .email(),
   password: z
     .string()
     .min(5, { message: "Password must be 8 or more characters long" }),

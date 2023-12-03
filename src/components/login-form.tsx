@@ -11,32 +11,54 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginUser } from "@/stores/useAuthorizationStore";
+
 import { useState } from "react";
 import { loginFormSchema } from "@/types/form-schemas";
 import { Eye, EyeOff } from "lucide-react";
+import { login } from "@/actions/post-authorization";
+import { setAuthorized, setUsername } from "@/stores/useAuthorizationStore";
+import { toast } from "./ui/use-toast";
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleClick = () => setIsVisible(!isVisible);
+  const handleEyeClick = () => setIsVisible(!isVisible);
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       username: "",
+      email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      loginUser(values.username, values.password);
-    }, 2000);
-    console.log(values);
+  async function onSubmit(data: z.infer<typeof loginFormSchema>) {
+    try {
+      setIsLoading(true);
+      login(data)
+        .then(() => {
+          setIsLoading(false);
+          setUsername(data.username);
+          setAuthorized(true);
+          toast({
+            variant: "default",
+            title: "Successful login",
+            description: `Have fun!`,
+          });
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: `There was a problem with your request. ${error}`,
+          });
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -57,6 +79,19 @@ export function LoginForm() {
         />
         <FormField
           control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input required placeholder="yourname@email.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem className="relative">
@@ -69,9 +104,12 @@ export function LoginForm() {
                   {...field}
                 />
               </FormControl>
-              <button className="absolute right-2 top-8" onClick={handleClick}>
+              <div
+                className="absolute right-2 top-8 cursor-pointer"
+                onClick={handleEyeClick}
+              >
                 {!isVisible ? <EyeOff /> : <Eye />}
-              </button>
+              </div>
 
               <FormMessage />
             </FormItem>
