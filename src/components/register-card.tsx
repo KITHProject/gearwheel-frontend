@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Cog } from "lucide-react";
+import { ArrowLeft, Cog } from "lucide-react";
 import { RegisterForm } from "./register-form";
 
 type Props = {
@@ -19,7 +19,8 @@ function RegisterCard({ setIsLogin }: Props) {
       <CardHeader className="relative">
         <CardTitle className="text-center">Register</CardTitle>
         <CardDescription className="flex justify-center items-center gap-1">
-          GEARWHEEL <Cog size={26} />
+          <Cog size={20} />
+          gearwheel
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -28,10 +29,10 @@ function RegisterCard({ setIsLogin }: Props) {
       <CardFooter className="flex flex-col gap-4">
         <Button
           className="rounded"
-          variant="secondary"
+          variant="ghost"
           onClick={() => setIsLogin(true)}
         >
-          Go Back
+          <ArrowLeft size={16} /> Go Back
         </Button>
       </CardFooter>
     </Card>

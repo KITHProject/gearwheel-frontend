@@ -20,12 +20,13 @@ function LoginCard({ setIsLogin }: Props) {
       <CardHeader className="relative">
         <CardTitle className="text-center">Welcome Back!</CardTitle>
         <CardDescription className="flex justify-center items-center gap-1">
-          GEARWHEEL <Cog size={26} />
+          <Cog size={20} />
+          gearwheel
         </CardDescription>
       </CardHeader>
       <CardContent>
         <LoginForm />
-        <Button className="p-0 mt-2" variant={"link"}>
+        <Button className="p-0 mt-2 cursor-not-allowed" variant={"link"}>
           Forgot your password?
         </Button>
       </CardContent>

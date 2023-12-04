@@ -18,6 +18,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { login } from "@/actions/post-login";
 import { setAuthorized, setUsername } from "@/stores/useAuthorizationStore";
 import { toast } from "./ui/use-toast";
+import LoadingSpinner from "./ui/loading-spinner";
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -99,7 +100,7 @@ export function LoginForm() {
           )}
         />
         <Button type="submit" disabled={isLoading} className="w-full rounded">
-          {isLoading ? "Loading..." : "Login"}
+          {isLoading ? <LoadingSpinner /> : "Login"}
         </Button>
       </form>
     </Form>

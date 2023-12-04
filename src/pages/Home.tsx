@@ -1,70 +1,14 @@
-import { Button } from "@/components/ui/button";
-import Navbar from "@/components/ui/navbar";
-import {
-  logoutUser,
-  useAuthorizationStore,
-} from "@/stores/useAuthorizationStore";
-import { Cog } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useGetStaffUsers } from "@/actions/get-staff-users";
-import LoadingSpinner from "@/components/ui/loading-spinner";
+import { useAuthorizationStore } from "@/stores/useAuthorizationStore";
+
+import Header from "@/components/header";
 
 function Home() {
   const username = useAuthorizationStore((state) => state.username);
-  const {
-    data: staffUsersData,
-    isLoading: isLoadingStaffUsers,
-    error: errorStaffUsers,
-    refetch: refetchStaffUsers,
-  } = useGetStaffUsers();
-
-  console.log(staffUsersData);
 
   return (
-    <div className="flex-col md:flex">
-      <div className="border-b">
-        <div className="flex justify-between max-w-7xl mx-auto p-4">
-          <div className="flex justify-center items-center gap-1">
-            GEARWHEEL
-            <Cog size={26} />
-          </div>
-          <Navbar />
-          <div className="flex items-center gap-2">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <h2 className="text-xl font-bold tracking-tight">{username}</h2>
-            <Button
-              size="sm"
-              variant="destructive"
-              onClick={() => {
-                logoutUser();
-              }}
-            >
-              Log out
-            </Button>
-          </div>
-        </div>
-      </div>
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <div className="flex items-center justify-between space-y-2"></div>
-      </div>
-      <ul className="flex justify-center items-center">
-        <li>
-          <Link to="/test"> Go to Test Page</Link>
-          <Button
-            size="sm"
-            variant="default"
-            onClick={() => {
-              refetchStaffUsers();
-            }}
-          >
-            {isLoadingStaffUsers ? <LoadingSpinner /> : "Get users"}
-          </Button>
-        </li>
-      </ul>
+    <div className="flex-col flex min-h-screen relative">
+      <Header />
+      <div className="max-w-7xl mx-auto p-4 text-center">Home</div>
     </div>
   );
 }
