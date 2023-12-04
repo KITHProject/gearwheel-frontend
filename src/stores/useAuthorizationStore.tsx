@@ -8,7 +8,7 @@ import { immer } from "zustand/middleware/immer";
 export const useAuthorizationStore = create<AuthorizationStoreState>()(
   immer((set) => ({
     username: "",
-    authorized: true,
+    authorized: false,
 
     logoutUser: () => {
       set((state) => {
