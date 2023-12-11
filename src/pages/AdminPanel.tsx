@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { loginUser } from "@/stores/useAuthorizationStore";
 
-function LoginPanel() {
+function AdminPanel() {
   return (
     <>
       <div className="flex-col md:flex">
@@ -11,15 +11,9 @@ function LoginPanel() {
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">
-              nie zalgoowano
+              zalgoowano
             </h2>
-            <Button
-              onClick={() => {
-                loginUser("admin", "haslo123");
-              }}
-            >
-              log in
-            </Button>
+            admin panel rzeczy
           </div>
         </div>
       </div>
@@ -27,4 +21,4 @@ function LoginPanel() {
   );
 }
 
-export default LoginPanel;
+export default AdminPanel;
