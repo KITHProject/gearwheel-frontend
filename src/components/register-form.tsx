@@ -26,7 +26,7 @@ export function RegisterForm() {
     defaultValues: {
       username: "",
       email: "",
-      password: "",
+      password1: "",
       password2: "",
     },
   });
@@ -84,7 +84,7 @@ export function RegisterForm() {
         />
         <FormField
           control={form.control}
-          name="password"
+          name="password1"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>

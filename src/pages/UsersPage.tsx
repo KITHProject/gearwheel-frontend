@@ -23,7 +23,7 @@ function UsersPage() {
             size="sm"
             variant="default"
             onClick={() => {
-              // refetchStaffUsers();
+              refetchStaffUsers();
             }}
           >
             {/* <LoadingSpinner /> */}

@@ -13,14 +13,14 @@ export const registerFormSchema = z
 
       .email(),
 
-    password: z
+    password1: z
       .string()
       .min(5, { message: "Password must be 8 or more characters long" }),
     password2: z
       .string()
       .min(5, { message: "Password must be 8 or more characters long" }),
   })
-  .refine((data) => data.password === data.password2, {
+  .refine((data) => data.password1 === data.password2, {
     message: "Passwords must match",
     path: ["password2"],
   });
