@@ -1,10 +1,6 @@
-import { useAuthorizationStore } from "@/stores/useAuthorizationStore";
-
 import Header from "@/components/header";
 
 function Home() {
-  const username = useAuthorizationStore((state) => state.username);
-
   return (
     <div className="flex-col flex min-h-screen relative">
       <Header />
