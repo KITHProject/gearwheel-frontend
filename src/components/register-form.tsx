@@ -17,9 +17,12 @@ import { useState } from "react";
 import { registerFormSchema } from "@/types/form-schemas";
 import { register } from "@/actions/post-register";
 import { toast } from "./ui/use-toast";
+import { Eye, EyeOff } from "lucide-react";
 
 export function RegisterForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const handleEyeClick = () => setIsVisible(!isVisible);
 
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
@@ -86,11 +89,21 @@ export function RegisterForm() {
           control={form.control}
           name="password1"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your password" {...field} />
+                <Input
+                  type={!isVisible ? "password" : "text"}
+                  placeholder="Enter your password"
+                  {...field}
+                />
               </FormControl>
+              <div
+                className="absolute right-2 top-8 cursor-pointer"
+                onClick={handleEyeClick}
+              >
+                {!isVisible ? <EyeOff /> : <Eye />}
+              </div>
               <FormMessage />
             </FormItem>
           )}
@@ -102,7 +115,11 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                <Input placeholder="Confirm your password" {...field} />
+                <Input
+                  type={!isVisible ? "password" : "text"}
+                  placeholder="Confirm your password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

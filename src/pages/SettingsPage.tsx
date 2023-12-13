@@ -5,7 +5,7 @@ function SettingsPage() {
   return (
     <div className="flex-col flex min-h-screen relative">
       <Header />
-      <div className="max-w-7xl mx-auto mt-4 px-2">
+      <div className="max-w-7xl sm:mx-auto my-4 px-2">
         <div className="border rounded-xl shadow">
           <div className="space-y-6 p-10">
             <div className="border-b space-y-0.5 pb-6">
@@ -16,10 +16,7 @@ function SettingsPage() {
             </div>
             <div className="flex flex-col lg:flex-row  items-start space-y-8 lg:space-x-12 lg:space-y-0">
               <aside className="-mx-2 lg:w-1/5">
-                <nav className="flex lg:flex-col ">
-                  <a className="w-full py-2 px-4 hover:bg-gray-400 hover:text-white rounded-md cursor-pointer">
-                    Profile
-                  </a>
+                <nav className="flex items-center justify-center lg:flex-col ">
                   <a className="w-full py-2 px-4 hover:bg-gray-400 hover:text-white rounded-md cursor-pointer">
                     Account
                   </a>

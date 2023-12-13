@@ -1,13 +1,16 @@
 import { Cog, LogOut, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { logoutUser } from "@/stores/useAuthorizationStore";
+import {
+  logoutUser,
+  useAuthorizationStore,
+} from "@/stores/useAuthorizationStore";
 import { ModeToggle } from "@/components/mode-toggle";
 import Navbar from "@/components/ui/navbar";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
 function Header() {
+  const username = useAuthorizationStore((state) => state.username);
   const [nav, setNav] = useState(false);
   const handleHamburgerClick = () => setNav(!nav);
 
@@ -69,10 +72,7 @@ function Header() {
 
           <div className="hidden md:flex items-center gap-2">
             <ModeToggle />
-            <Avatar className="h-8 w-8">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <span>{username}</span>
             <Button
               className="h-8 w-8 ml-2"
               size="icon"

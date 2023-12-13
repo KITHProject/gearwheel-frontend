@@ -15,7 +15,7 @@ type Props = {
 };
 function RegisterCard({ setIsLogin }: Props) {
   return (
-    <Card className="w-96">
+    <Card className="w-full">
       <CardHeader className="relative">
         <CardTitle className="text-center">Register</CardTitle>
         <CardDescription className="flex justify-center items-center gap-1">
@@ -29,7 +29,7 @@ function RegisterCard({ setIsLogin }: Props) {
       <CardFooter className="flex flex-col gap-4">
         <Button
           className="rounded"
-          variant="ghost"
+          variant="outline"
           onClick={() => setIsLogin(true)}
         >
           <ArrowLeft size={16} /> Go Back

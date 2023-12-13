@@ -1,18 +1,19 @@
-import { useGetStaffUsers } from "@/actions/get-staff-users";
+import { useGetUsers } from "@/actions/get-users";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/ui/columns";
 import LoadingSpinner from "@/components/ui/loading-spinner";
 import Header from "@/components/header";
 import { mockData } from "@/utils/mockData";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 
 function UsersPage() {
   const {
-    data: staffUsersData,
-    isLoading: isLoadingStaffUsers,
-    error: errorStaffUsers,
-    refetch: refetchStaffUsers,
-  } = useGetStaffUsers();
+    data: usersData,
+    isLoading: isLoadingUsers,
+    error: errorUsers,
+    refetch: refetchUsers,
+  } = useGetUsers();
   return (
     <div className="flex-col md:flex">
       <Header />
@@ -23,16 +24,23 @@ function UsersPage() {
             size="sm"
             variant="default"
             onClick={() => {
-              refetchStaffUsers();
+              refetchUsers();
+              if (errorUsers) {
+                toast({
+                  variant: "destructive",
+                  title: "Uh oh! Something went wrong.",
+                  description: `There was a problem with your request (${errorUsers?.message}).`,
+                });
+              }
             }}
           >
             {/* <LoadingSpinner /> */}
-            {isLoadingStaffUsers ? <LoadingSpinner /> : "Get users"}
+            {isLoadingUsers ? <LoadingSpinner /> : "Get users"}
           </Button>
         </div>
         <DataTable columns={columns} data={mockData} />
       </div>
-      <footer className="text-center text-sm">...</footer>
+      {/* <footer className="text-center text-sm">...</footer> */}
     </div>
   );
 }

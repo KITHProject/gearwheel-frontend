@@ -44,7 +44,7 @@ export function LoginForm() {
         toast({
           variant: "default",
           title: "Successful login",
-          description: `Have fun!`,
+          description: `Have fun ${data.username}!`,
         });
       })
       .catch((error) => {

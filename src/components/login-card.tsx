@@ -16,7 +16,7 @@ type Props = {
 };
 function LoginCard({ setIsLogin }: Props) {
   return (
-    <Card className="w-96">
+    <Card className="w-full">
       <CardHeader className="relative">
         <CardTitle className="text-center">Welcome Back!</CardTitle>
         <CardDescription className="flex justify-center items-center gap-1">
