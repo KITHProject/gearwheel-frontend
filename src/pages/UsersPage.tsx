@@ -17,7 +17,7 @@ function UsersPage() {
   return (
     <div className="flex-col md:flex">
       <Header />
-      <div className="max-w-7xl mx-auto p-4 text-center">
+      <div className="max-w-7xl lg:mx-auto p-4 text-center">
         <div className="text-center">
           <Button
             className="my-4 text-white w-32"
