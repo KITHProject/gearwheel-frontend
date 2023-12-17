@@ -1,19 +1,13 @@
-import { useAuthorizationStore } from "@/stores/useAuthorizationStore";
 import api from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
-export const getUsers = async (token: string | undefined) => {
-  const response = await api.get("users/", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getUsers = async () => {
+  const response = await api.get("users/");
   return response.data;
 };
 
 export const useGetUsers = () => {
-  const token = useAuthorizationStore((state) => state.accessToken);
-  const queryFN = () => getUsers(token);
+  const queryFN = () => getUsers();
   return useQuery({
     queryKey: ["users"],
     queryFn: queryFN,
