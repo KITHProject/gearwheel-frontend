@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const navigationLinks = [
   {
@@ -11,7 +11,7 @@ const navigationLinks = [
   },
   {
     name: "Products",
-    to: "/",
+    to: "/products",
   },
   {
     name: "Settings",
@@ -24,13 +24,17 @@ function Navbar() {
     <>
       {navigationLinks.map((link) => {
         return (
-          <Link
+          <NavLink
             key={link.name}
             to={link.to}
-            className="text-xl md:text-sm font-medium transition-colors hover:text-primary"
+            className={({ isActive }) =>
+              isActive
+                ? "text-primary font-bold"
+                : "text-xl font-medium transition-colors text-zinc-500 md:text-sm hover:text-primary"
+            }
           >
             {link.name}
-          </Link>
+          </NavLink>
         );
       })}
     </>

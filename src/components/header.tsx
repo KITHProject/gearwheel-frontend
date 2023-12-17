@@ -1,5 +1,5 @@
 import { Cog, LogOut, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   logoutUser,
   useAuthorizationStore,
@@ -13,26 +13,24 @@ function Header() {
   const username = useAuthorizationStore((state) => state.username);
   const [nav, setNav] = useState(false);
   const handleHamburgerClick = () => setNav(!nav);
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex items-center justify-between max-w-7xl mx-auto h-14 px-4 sm:px-8">
-        <Link
-          to="/"
-          className="flex justify-center items-center gap-1 font-bold"
-        >
-          <Cog size={26} />
-          gearwheel
+      <div className="flex items-center justify-between px-4 mx-auto max-w-7xl h-14 sm:px-8">
+        <Link to="/" className="flex items-center justify-center font-bold">
+          <Cog className="mr-1" size={26} />
+          gearwheel<span className="text-slate-500">/admin</span>
         </Link>
         {/* menu */}
         <div className="flex">
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium border-r px-3 mr-2">
+          <nav className="items-center hidden px-3 mr-2 space-x-6 text-sm font-medium border-r md:flex">
             <Navbar />
           </nav>
           {/* hamburger */}
           <div
             onClick={handleHamburgerClick}
-            className="md:hidden cursor-pointer z-10 flex items-center gap-2"
+            className="z-10 flex items-center gap-2 cursor-pointer md:hidden"
           >
             <ModeToggle />
             {!nav ? (
@@ -53,16 +51,17 @@ function Header() {
             <div className="flex flex-col items-center gap-2 space-y-4">
               <Link
                 to="/"
-                className="flex gap-1 items-center text-xl font-medium hover:text-primary cursor-pointer"
+                className="flex items-center gap-1 text-xl font-medium cursor-pointer hover:text-primary"
               >
                 Profile
               </Link>
               <Button
-                className="h-8 w-8"
+                className="w-8 h-8"
                 size="lg"
                 variant="destructive"
                 onClick={() => {
                   logoutUser();
+                  navigate("/");
                 }}
               >
                 Logout <LogOut size={16} />
@@ -70,15 +69,16 @@ function Header() {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className="items-center hidden gap-2 md:flex">
             <ModeToggle />
             <span>{username}</span>
             <Button
-              className="h-8 w-8 ml-2"
+              className="w-8 h-8 ml-2"
               size="icon"
               variant="destructive"
               onClick={() => {
                 logoutUser();
+                navigate("/");
               }}
             >
               <LogOut size={16} />
