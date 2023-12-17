@@ -1,6 +1,6 @@
 import { useGetUsers } from "@/actions/get-users";
 import { DataTable } from "@/components/data-table";
-import { columns } from "@/components/ui/columns";
+import { usersColumns } from "@/components/ui/users-columns";
 import LoadingSpinner from "@/components/ui/loading-spinner";
 import Header from "@/components/header";
 import { mockData } from "@/utils/mockData";
@@ -17,10 +17,10 @@ function UsersPage() {
   return (
     <div className="flex-col md:flex">
       <Header />
-      <div className="max-w-7xl lg:mx-auto p-4 text-center">
+      <div className="p-4 text-center max-w-7xl lg:mx-auto">
         <div className="text-center">
           <Button
-            className="my-4 text-white w-32"
+            className="my-4"
             size="sm"
             variant="default"
             onClick={() => {
@@ -38,9 +38,9 @@ function UsersPage() {
             {isLoadingUsers ? <LoadingSpinner /> : "Get users"}
           </Button>
         </div>
-        <DataTable columns={columns} data={mockData} />
+        <DataTable columns={usersColumns} data={mockData} />
       </div>
-      {/* <footer className="text-center text-sm">...</footer> */}
+      {/* <footer className="text-sm text-center">...</footer> */}
     </div>
   );
 }
