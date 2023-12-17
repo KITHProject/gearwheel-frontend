@@ -64,7 +64,7 @@ export function LoginForm() {
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="space-y-2">
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input required placeholder="Username" {...field} />
@@ -78,7 +78,7 @@ export function LoginForm() {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem className="relative">
+            <FormItem className="relative space-y-2">
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input

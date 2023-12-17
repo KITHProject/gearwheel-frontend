@@ -13,12 +13,6 @@ export type AuthorizationStoreState = {
   username: string;
   authorized: boolean;
 
-  accessToken: string | undefined;
-  refreshToken: string | undefined;
-
-  setAccessToken: (accessToken: string | undefined) => void;
-  setRefreshToken: (refreshToken: string | undefined) => void;
-
   logoutUser: () => void;
   setUsername: (name: string) => void;
   setAuthorized: (flag: boolean) => void;

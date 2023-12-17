@@ -37,3 +37,17 @@ export const loginFormSchema = z.object({
     .string()
     .min(5, { message: "Password must be 8 or more characters long" }),
 });
+
+export const productCategoriesSchema = z.object({
+  title: z
+    .string()
+    .min(2, {
+      message: "Title too short",
+    })
+    .max(30, {
+      message: "Title too long",
+    }),
+  primary: z.coerce.boolean(),
+
+  // parent_category: z.coerce.number(),
+});

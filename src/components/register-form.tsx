@@ -99,7 +99,7 @@ export function RegisterForm() {
                 />
               </FormControl>
               <div
-                className="absolute right-2 top-8 cursor-pointer"
+                className="absolute cursor-pointer right-2 top-8"
                 onClick={handleEyeClick}
               >
                 {!isVisible ? <EyeOff /> : <Eye />}
