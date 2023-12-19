@@ -18,7 +18,7 @@ function RegisterCard({ setIsLogin }: Props) {
     <Card className="w-full">
       <CardHeader className="relative">
         <CardTitle className="text-center">Register</CardTitle>
-        <CardDescription className="flex justify-center items-center gap-1">
+        <CardDescription className="flex items-center justify-center gap-1">
           <Cog size={20} />
           gearwheel
         </CardDescription>
@@ -26,7 +26,7 @@ function RegisterCard({ setIsLogin }: Props) {
       <CardContent>
         <RegisterForm />
       </CardContent>
-      <CardFooter className="flex flex-col gap-4">
+      <CardFooter className="flex flex-col my-2">
         <Button
           className="rounded"
           variant="outline"

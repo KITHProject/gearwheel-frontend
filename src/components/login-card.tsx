@@ -19,7 +19,7 @@ function LoginCard({ setIsLogin }: Props) {
     <Card className="w-full">
       <CardHeader className="relative">
         <CardTitle className="text-center">Welcome Back!</CardTitle>
-        <CardDescription className="flex justify-center items-center gap-1">
+        <CardDescription className="flex items-center justify-center gap-1">
           <Cog size={20} />
           gearwheel
         </CardDescription>

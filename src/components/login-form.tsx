@@ -59,7 +59,7 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <FormField
           control={form.control}
           name="username"
@@ -89,7 +89,7 @@ export function LoginForm() {
                 />
               </FormControl>
               <div
-                className="absolute right-2 top-8 cursor-pointer"
+                className="absolute cursor-pointer right-2 top-8"
                 onClick={handleEyeClick}
               >
                 {!isVisible ? <EyeOff /> : <Eye />}
