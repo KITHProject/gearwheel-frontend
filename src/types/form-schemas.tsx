@@ -49,5 +49,9 @@ export const productCategoriesSchema = z.object({
     }),
   primary: z.coerce.boolean(),
 
-  // parent_category: z.coerce.number(),
+  parent_category: z.coerce.number(),
+});
+
+export const productCategoriesSchemaOptional = productCategoriesSchema.partial({
+  parent_category: true,
 });
