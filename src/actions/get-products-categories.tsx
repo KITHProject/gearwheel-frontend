@@ -13,6 +13,6 @@ export const useGetProductCategories = () => {
     queryFn: queryFN,
     refetchOnWindowFocus: false,
     retry: false,
-    enabled: false,
+    enabled: true,
   });
 };

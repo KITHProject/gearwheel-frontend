@@ -14,12 +14,21 @@ function UsersPage() {
     error: errorUsers,
     refetch: refetchUsers,
   } = useGetUsers();
+
+  if (errorUsers) {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: `There was a problem with your request (${errorUsers}).`,
+    });
+  }
+
   return (
     <div className="flex-col md:flex">
       <Header />
-      <div className="p-4 text-center max-w-7xl lg:mx-auto">
-        <div className="text-center">
-          <Button
+      <div className="w-full p-4 text-center max-w-7xl lg:mx-auto">
+        <div className="relative text-center">
+          {/* <Button
             className="my-4"
             size="sm"
             variant="default"
@@ -29,18 +38,22 @@ function UsersPage() {
                 toast({
                   variant: "destructive",
                   title: "Uh oh! Something went wrong.",
-                  description: `There was a problem with your request (${errorUsers?.message}).`,
+                  description: `There was a problem with your request (${errorUsers}).`,
                 });
               }
             }}
           >
-            {/* <LoadingSpinner /> */}
             {isLoadingUsers ? <LoadingSpinner /> : "Get users"}
-          </Button>
+          </Button> */}
         </div>
-        <DataTable columns={usersColumns} data={mockData} />
+        {isLoadingUsers ? (
+          <div className="flex items-center justify-center">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <DataTable columns={usersColumns} data={usersData} />
+        )}
       </div>
-      {/* <footer className="text-sm text-center">...</footer> */}
     </div>
   );
 }
