@@ -13,10 +13,10 @@ const navigationLinks = [
     name: "Products",
     to: "/products",
   },
-  {
-    name: "Settings",
-    to: "/settings",
-  },
+  // {
+  //   name: "Settings",
+  //   to: "/settings",
+  // },
 ];
 
 function Navbar() {
@@ -29,8 +29,8 @@ function Navbar() {
             to={link.to}
             className={({ isActive }) =>
               isActive
-                ? "text-primary font-bold"
-                : "text-xl font-medium transition-colors text-zinc-500 md:text-sm hover:text-primary"
+                ? "md:text-sm  text-2xl text-primary font-bold"
+                : "text-2xl font-medium transition-colors text-zinc-500 md:text-sm hover:text-primary"
             }
           >
             {link.name}
