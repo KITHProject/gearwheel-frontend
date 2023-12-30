@@ -2,7 +2,7 @@ import { useGetUsers } from "@/actions/get-users";
 import { DataTable } from "@/components/data-table";
 import { usersColumns } from "@/components/ui/users-columns";
 import LoadingSpinner from "@/components/ui/loading-spinner";
-import Header from "@/components/header";
+import Sidebar from "@/components/sidebar";
 import { mockData } from "@/utils/mockData";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
@@ -24,9 +24,9 @@ function UsersPage() {
   }
 
   return (
-    <div className="flex-col md:flex">
-      <Header />
-      <div className="w-full p-4 text-center max-w-7xl lg:mx-auto">
+    <div className="flex bg-zinc-100">
+      <Sidebar />
+      <div className="w-full p-4 max-w-7xl lg:mx-auto">
         <div className="relative text-center">
           {/* <Button
             className="my-4"
