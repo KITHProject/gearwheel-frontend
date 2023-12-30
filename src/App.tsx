@@ -15,21 +15,6 @@ import { useEffect } from "react";
 
 const App = () => {
   const queryClient = new QueryClient();
-  // Example using async/await
-  const checkAuthentication = async () => {
-    const authToken = localStorage.getItem("token");
-    if (authToken) {
-      // Validate the token against the server
-
-      setAuthorized(true);
-    }
-  };
-
-  // Call the function when the app loads
-  useEffect(() => {
-    checkAuthentication();
-  }, []);
-
   const authorized = useAuthorizationStore((state) => state.authorized);
   return (
     <>

@@ -1,22 +1,27 @@
+import { Bike, LayoutDashboard, Settings, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const navigationLinks = [
   {
-    name: "Overview",
+    name: "Dashboard",
     to: "/",
+    icon: <LayoutDashboard />,
   },
   {
     name: "Users",
     to: "/users",
+    icon: <Users />,
   },
   {
     name: "Products",
     to: "/products",
+    icon: <Bike />,
   },
-  // {
-  //   name: "Settings",
-  //   to: "/settings",
-  // },
+  {
+    name: "Settings",
+    to: "/settings",
+    icon: <Settings />,
+  },
 ];
 
 function Navbar() {
@@ -29,11 +34,11 @@ function Navbar() {
             to={link.to}
             className={({ isActive }) =>
               isActive
-                ? "md:text-sm  text-2xl text-primary font-bold"
-                : "text-2xl font-medium transition-colors text-zinc-500 md:text-sm hover:text-primary"
+                ? "text-2xl flex gap-2 items-center text-primary font-bold"
+                : "text-2xl flex gap-2 items-center font-medium transition-colors text-zinc-500  hover:text-primary"
             }
           >
-            {link.name}
+            {link.icon} <span className="hidden md:flex"> {link.name}</span>
           </NavLink>
         );
       })}
