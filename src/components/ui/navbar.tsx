@@ -1,5 +1,11 @@
-import { Bike, LayoutDashboard, Settings, Users } from "lucide-react";
+import { Box, LayoutDashboard, Settings, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const navigationLinks = [
   {
@@ -15,7 +21,7 @@ const navigationLinks = [
   {
     name: "Products",
     to: "/products",
-    icon: <Bike />,
+    icon: <Box />,
   },
   {
     name: "Settings",
@@ -38,7 +44,16 @@ function Navbar() {
                 : "text-2xl flex gap-2 items-center font-medium transition-colors text-zinc-500  hover:text-primary"
             }
           >
-            {link.icon} <span className="hidden md:flex"> {link.name}</span>
+            {}
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>{link.icon}</TooltipTrigger>
+                <TooltipContent className="block md:hidden ">
+                  {link.name}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <span className="hidden md:flex"> {link.name}</span>
           </NavLink>
         );
       })}

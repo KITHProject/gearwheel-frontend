@@ -17,7 +17,7 @@ function Sidebar() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen border-r">
+    <div className="h-screen border-r">
       <div className="flex flex-col justify-between h-full px-4 mx-auto">
         <div>
           <div className="flex p-4">
@@ -42,27 +42,33 @@ function Sidebar() {
           </div>
           {/* menu */}
           <Separator />
-          <nav className="flex flex-col px-4 mt-10 space-y-6 font-medium">
+          <nav className="flex flex-col px-4 py-2 mt-10 space-y-4 font-medium md:gap-2">
             <Navbar />
           </nav>
         </div>
-        <div className="py-4">
-          <Separator />
-          <ModeToggle />
-          <div className="flex items-center justify-between gap-2 p-1 ">
+        <div className="flex flex-col items-center justify-center py-4">
+          <Separator className="mb-4" />
+          <span className="flex items-center justify-center gap-2">
+            {" "}
+            <span className="hidden gap-2 md:block">Change theme </span>
+            <ModeToggle />
+          </span>
+          <div className="flex items-center justify-between gap-2 p-1 my-1">
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            {username}
-            <span
-              className="flex items-center text-2xl font-medium transition-colors cursor-pointer hover:text-red-500"
-              onClick={() => {
-                logoutUser();
-                navigate("/");
-              }}
-            >
-              <LogOut size={16} />
+            <span className="hidden gap-2 md:flex">
+              {username}
+              <span
+                className="flex items-center text-2xl font-medium transition-colors cursor-pointer hover:text-red-500"
+                onClick={() => {
+                  logoutUser();
+                  navigate("/");
+                }}
+              >
+                <LogOut size={16} />
+              </span>
             </span>
           </div>
         </div>
