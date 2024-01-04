@@ -1,11 +1,9 @@
 import { useGetUsers } from "@/actions/get-users";
 import { DataTable } from "@/components/data-table";
 import { usersColumns } from "@/components/ui/users-columns";
-import LoadingSpinner from "@/components/ui/loading-spinner";
 import Sidebar from "@/components/sidebar";
-import { mockData } from "@/utils/mockData";
-import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function UsersPage() {
   const {
@@ -24,11 +22,11 @@ function UsersPage() {
   }
 
   return (
-    <div className="flex bg-zinc-100">
+    <div className="flex bg-zinc-100 dark:bg-primary-foreground">
       <Sidebar />
-      <div className="w-full p-4 max-w-7xl lg:mx-auto">
-        <div className="relative text-center">
-          {/* <Button
+      <div className="p-4 mx-auto overflow-auto max-w-7xl">
+        {/* <div className="relative text-center"> */}
+        {/* <Button
             className="my-4"
             size="sm"
             variant="default"
@@ -45,10 +43,10 @@ function UsersPage() {
           >
             {isLoadingUsers ? <LoadingSpinner /> : "Get users"}
           </Button> */}
-        </div>
+        {/* </div> */}
         {isLoadingUsers ? (
           <div className="flex items-center justify-center">
-            <LoadingSpinner />
+            <Skeleton className="w-[100px] h-[20px] rounded-full" />
           </div>
         ) : (
           <DataTable columns={usersColumns} data={usersData} />

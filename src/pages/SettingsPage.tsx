@@ -20,7 +20,7 @@ import Sidebar from "@/components/sidebar";
 
 function SettingsPage() {
   return (
-    <div className="relative flex bg-zinc-100">
+    <div className="relative flex bg-zinc-100 dark:bg-primary-foreground">
       <Sidebar />
       <div className="px-2 my-4 max-w-7xl sm:mx-auto">
         <div className="border shadow rounded-xl bg-primary-foreground">

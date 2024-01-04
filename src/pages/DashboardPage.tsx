@@ -14,11 +14,11 @@ import Sidebar from "@/components/sidebar";
 
 export default function DashboardPage() {
   return (
-    <div className="relative flex min-h-screen overflow-hidden bg-zinc-100">
+    <div className="relative flex min-h-screen overflow-hidden bg-zinc-100 dark:bg-primary-foreground">
       <Sidebar />
-      <div className="mx-auto overflow-auto max-w-7xl">
-        <div className="flex flex-col h-screen p-8 space-y-4 ">
-          <div className="flex items-center justify-between space-y-2">
+      <div className="w-full mx-auto overflow-auto max-w-7xl">
+        <div className="flex flex-col max-h-screen p-8 space-y-4 ">
+          <div className="flex items-center justify-between gap-2 space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />

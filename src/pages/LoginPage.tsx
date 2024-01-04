@@ -8,7 +8,7 @@ function LoginPage() {
   const [isForgotPassword, setIsForgotPassword] = useState(true);
 
   return (
-    <div className="flex flex-col justify-center min-h-screen bg-gray-200 dark:bg-zinc-700/30">
+    <div className="flex flex-col justify-center min-h-screen bg-gray-200 dark:bg-primary-foreground">
       <div className="p-4 sm:mx-auto sm:w-96">
         {isLogin ? (
           <>
