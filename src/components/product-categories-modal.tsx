@@ -25,10 +25,8 @@ import {
 } from "@/components/ui/form";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
-import { useState } from "react";
 
 function AddProductCategoriesModal() {
-  const [primary, setPrimary] = useState<boolean>();
   const form = useForm<z.infer<typeof productCategoriesSchemaOptional>>({
     resolver: zodResolver(productCategoriesSchemaOptional),
     defaultValues: {
@@ -94,25 +92,16 @@ function AddProductCategoriesModal() {
                   <FormItem className="flex items-center gap-2 px-4">
                     <FormLabel>Primary</FormLabel>
                     <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        className="flex"
-                      >
+                      <RadioGroup className="flex">
                         <FormItem className="flex items-center space-x-2">
                           <FormControl>
-                            <RadioGroupItem
-                              onClick={() => setPrimary(field.value)}
-                              value="true"
-                            />
+                            <RadioGroupItem value="true" />
                           </FormControl>
                           <FormLabel>Yes</FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-2">
                           <FormControl>
-                            <RadioGroupItem
-                              onClick={() => setPrimary(field.value)}
-                              value="false"
-                            />
+                            <RadioGroupItem value="" />
                           </FormControl>
                           <FormLabel>No</FormLabel>
                         </FormItem>

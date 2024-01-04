@@ -1,9 +1,10 @@
 import { mockProducts } from "@/pages/ProductsPage";
 
-function ProductCard({ title, category }: mockProducts) {
+function ProductCard({ image, title, category }: mockProducts) {
   return (
-    <div className="border shadow rounded-xl">
-      <div className="p-4">
+    <div className="w-32 border shadow-md rounded-xl">
+      <div className="p-4 text-sm">
+        <img src={image} alt="" />
         <p>{title}</p>
         <p>{category}</p>
       </div>

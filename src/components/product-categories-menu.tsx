@@ -20,7 +20,7 @@ function ProductCategoriesMenu() {
     refetch: refetchProductCategoriesMenu,
   } = useGetProductCategoriesMenu();
 
-  console.log(productsCategoriesMenuData);
+  // console.log(productsCategoriesMenuData);
   return (
     <>
       <div className="space-x-2 text-center">
