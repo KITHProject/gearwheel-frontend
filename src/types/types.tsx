@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export type ProductCategoriesType = {
   title: string;
   primary: boolean;
