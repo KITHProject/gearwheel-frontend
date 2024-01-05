@@ -25,7 +25,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { mockProducts } from "@/pages/ProductsPage";
+import { mockProducts } from "../products";
 
 export const productsColumns: ColumnDef<mockProducts>[] = [
   {

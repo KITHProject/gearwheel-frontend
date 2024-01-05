@@ -1,14 +1,87 @@
-import { mockProducts } from "@/pages/ProductsPage";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Trash } from "lucide-react";
+import { Button } from "./ui/button";
+import { deleteProducts } from "@/actions/delete-products";
 
-function ProductCard({ image, title, category }: mockProducts) {
+type ProductCard = {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  color: string;
+  category: string;
+};
+
+function ProductCard({
+  id,
+  title,
+  description,
+  price,
+  color,
+  category,
+}: ProductCard) {
+  const handleDeleteProduct = () => {
+    deleteProducts(parseInt(id));
+  };
   return (
-    <div className="w-32 border shadow-md rounded-xl">
-      <div className="p-4 text-sm">
-        <img src={image} alt="" />
-        <p>{title}</p>
+    <Card id={id} className="relative">
+      <CardHeader>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              size="icon"
+              variant="destructive"
+              className="absolute bottom-1 right-1"
+            >
+              <Trash />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete
+                product and remove data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDeleteProduct}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>{color}</p>
+        <p>{price}</p>
+      </CardContent>
+      <CardFooter>
         <p>{category}</p>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 }
 

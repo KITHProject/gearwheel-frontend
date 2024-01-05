@@ -8,3 +8,11 @@ export type CategoryMenu = {
   title: string;
   children: [];
 };
+
+export type Products = {
+  title: string;
+  description: string;
+  price: string;
+  color: string;
+  category: string;
+};
