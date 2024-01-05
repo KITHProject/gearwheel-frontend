@@ -31,33 +31,27 @@ function AddProductCategoriesModal() {
     resolver: zodResolver(productCategoriesSchemaOptional),
     defaultValues: {
       title: "",
-      primary: true,
+      primary: "true",
+      parent_category: undefined,
     },
   });
   async function onSubmit(
     data: z.infer<typeof productCategoriesSchemaOptional>
   ) {
-    // postProductCategories(data);
+    postProductCategories(data);
     // .then(() => {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-secondary">
-            {JSON.stringify(data, null, 2)}
-          </code>
-        </pre>
-      ),
-    });
+    // toast({
+    //   title: "You submitted the following values:",
+    //   description: (
+    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+    //       <code className="text-secondary">
+    //         {JSON.stringify(data, null, 2)}
+    //       </code>
+    //     </pre>
+    //   ),
+    // });
   }
-  // .catch((error) => {
-  //   toast({
-  //     variant: "destructive",
-  //     title: "Uh oh! Something went wrong.",
-  //     description: `There was a problem with your request (${error.message}).`,
-  //   });
-  //   console.log(error);
-  // });
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -92,18 +86,21 @@ function AddProductCategoriesModal() {
                   <FormItem className="flex items-center gap-2 px-4">
                     <FormLabel>Primary</FormLabel>
                     <FormControl>
-                      <RadioGroup className="flex">
-                        <FormItem className="flex items-center space-x-2">
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        className="flex space-x-1"
+                      >
+                        <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="true" />
                           </FormControl>
-                          <FormLabel>Yes</FormLabel>
+                          <FormLabel className="font-normal">true</FormLabel>
                         </FormItem>
-                        <FormItem className="flex items-center space-x-2">
+                        <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
-                            <RadioGroupItem value="" />
+                            <RadioGroupItem value="false" />
                           </FormControl>
-                          <FormLabel>No</FormLabel>
+                          <FormLabel className="font-normal">false</FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
@@ -118,7 +115,7 @@ function AddProductCategoriesModal() {
                   <FormItem className="flex items-center gap-2 px-4">
                     <FormLabel>Parent</FormLabel>
                     <FormControl>
-                      <Input type="number" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -11,8 +11,13 @@ import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/ui/loading-spinner";
 import { toast } from "@/components/ui/use-toast";
 import AddProductCategoriesModal from "./product-categories-modal";
+import { useState } from "react";
 
-function ProductCategoriesMenu() {
+function ProductCategoriesMenu({ setSearchInput }: any) {
+  const searchItems = (searchValue: string) => {
+    setSearchInput(searchValue);
+  };
+
   const {
     data: productsCategoriesMenuData,
     isLoading: isLoadingProductCategoriesMenu,
@@ -46,12 +51,20 @@ function ProductCategoriesMenu() {
         </Button>
         <AddProductCategoriesModal />
       </div>
-      <div className="m-2 space-x-2">
+      <div className="flex flex-col items-center p-2 sm:flex-row">
+        <Button onClick={() => searchItems("")} size="sm" variant="link">
+          All
+        </Button>
         {productsCategoriesMenuData?.map((category: CategoryMenu) => {
           return (
             <DropdownMenu key={category.title}>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline">{category.title}</Button>
+                <Button
+                  onClick={() => searchItems(category.title)}
+                  variant="link"
+                >
+                  {category.title}
+                </Button>
               </DropdownMenuTrigger>
               {category.children.length > 0 ? (
                 <DropdownMenuContent>
@@ -60,6 +73,7 @@ function ProductCategoriesMenu() {
                       return (
                         <DropdownMenuRadioItem
                           key={child.title}
+                          onClick={() => searchItems(child.title)}
                           className="cursor-pointer"
                           value={child}
                         >
