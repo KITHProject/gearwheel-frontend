@@ -36,10 +36,10 @@ function LandingPage() {
           </span>
         </header>
         <main>
-          <section className="flex flex-col items-center justify-center h-screen space-y-4">
-            <h1 className="font-bold text-7xl">
+          <section className="flex flex-col items-center space-y-4 mt-80">
+            <h1 className="text-xl font-bold sm:text-4xl md:text-6xl lg:text-7xl">
               Experience like <del>never</del>
-              <span className="inline-block ml-4 text-transparent bg-gradient-to-r from-blue-600 to-indigo-400 bg-clip-text">
+              <span className="inline-block ml-1 text-transparent sm:ml-2 md:ml-3 bg-gradient-to-r from-blue-600 to-indigo-400 bg-clip-text">
                 before.
               </span>
             </h1>
