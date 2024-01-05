@@ -12,6 +12,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner";
 import { toast } from "@/components/ui/use-toast";
 import AddProductCategoriesModal from "./product-categories-modal";
 import { useState } from "react";
+import ProductCategories from "./product-categories";
 
 function ProductCategoriesMenu({ setSearchInput }: any) {
   const searchItems = (searchValue: string) => {
@@ -28,7 +29,7 @@ function ProductCategoriesMenu({ setSearchInput }: any) {
   // console.log(productsCategoriesMenuData);
   return (
     <>
-      <div className="space-x-2 text-center">
+      <div className="flex flex-col items-center gap-2 sm:flex-row">
         <Button
           size="sm"
           variant="default"
@@ -46,9 +47,10 @@ function ProductCategoriesMenu({ setSearchInput }: any) {
           {isLoadingProductCategoriesMenu ? (
             <LoadingSpinner />
           ) : (
-            "Get categories"
+            "Get categories menu"
           )}
         </Button>
+        <ProductCategories />
         <AddProductCategoriesModal />
       </div>
       <div className="flex flex-col items-center p-2 sm:flex-row">

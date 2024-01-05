@@ -25,8 +25,17 @@ import {
 } from "@/components/ui/form";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { useGetProductCategoriesMenu } from "@/actions/get-product-categories-menu";
 
 function AddProductCategoriesModal() {
+  const { data: productsCategoriesMenuData } = useGetProductCategoriesMenu();
   const form = useForm<z.infer<typeof productCategoriesSchemaOptional>>({
     resolver: zodResolver(productCategoriesSchemaOptional),
     defaultValues: {
@@ -56,7 +65,7 @@ function AddProductCategoriesModal() {
     <Dialog>
       <DialogTrigger asChild>
         <Button size="sm" variant="default">
-          Add categories
+          Add category
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -112,12 +121,27 @@ function AddProductCategoriesModal() {
                 control={form.control}
                 name="parent_category"
                 render={({ field }) => (
-                  <FormItem className="flex items-center gap-2 px-4">
-                    <FormLabel>Parent</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
+                  <FormItem>
+                    <FormLabel>Parent Category</FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {productsCategoriesMenuData.map((category: any) => {
+                          return (
+                            <SelectItem
+                              key={category.title}
+                              value={category.title}
+                            >
+                              {category.title}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />
