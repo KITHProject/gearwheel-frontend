@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Cog } from "lucide-react";
 import { RegisterForm } from "./register-form";
+import { Link } from "react-router-dom";
 
 type Props = {
   setIsLogin: (isLogin: boolean) => void;
@@ -18,9 +19,11 @@ function RegisterCard({ setIsLogin }: Props) {
     <Card className="w-full">
       <CardHeader className="relative">
         <CardTitle className="text-center">Register</CardTitle>
-        <CardDescription className="flex items-center justify-center gap-1">
-          <Cog size={20} />
-          gearwheel
+        <CardDescription>
+          <Link to="/" className="flex items-center justify-center gap-1">
+            <Cog size={20} />
+            gearwheel
+          </Link>
         </CardDescription>
       </CardHeader>
       <CardContent>

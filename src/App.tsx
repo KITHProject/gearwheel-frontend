@@ -1,7 +1,4 @@
-import {
-  setAuthorized,
-  useAuthorizationStore,
-} from "./stores/useAuthorizationStore";
+import { useAuthorizationStore } from "./stores/useAuthorizationStore";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -11,7 +8,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProductsPage from "./pages/ProductsPage";
-import { useEffect } from "react";
+
+import LandingPage from "./pages/LandingPage";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -31,7 +29,8 @@ const App = () => {
               </>
             ) : (
               <>
-                <Route path="/" element={<LoginPage />}></Route>
+                <Route path="/" element={<LandingPage />}></Route>
+                <Route path="/login" element={<LoginPage />}></Route>
               </>
             )}
             <Route path="*" element={<ErrorPage />}></Route>
