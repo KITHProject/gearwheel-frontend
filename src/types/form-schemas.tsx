@@ -47,9 +47,9 @@ export const productCategoriesSchema = z.object({
     .max(30, {
       message: "Title too long",
     }),
-  primary: z.coerce.boolean(),
+  primary: z.coerce.string(),
 
-  parent_category: z.coerce.number(),
+  parent_category: z.coerce.string(),
 });
 
 export const productCategoriesSchemaOptional = productCategoriesSchema.partial({

@@ -1,7 +1,7 @@
 export type ProductCategoriesType = {
   title: string;
-  primary: boolean;
-  parent_category?: number;
+  primary: string;
+  parent_category?: string;
 };
 
 export type CategoryMenu = {
