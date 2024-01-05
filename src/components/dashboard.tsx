@@ -71,7 +71,8 @@ export function Dashboard() {
         />
         <Bar
           dataKey="total"
-          className="dark:fill-white"
+          fill="currentColor"
+          className="fill-primary"
           radius={[4, 4, 0, 0]}
         />
       </BarChart>
