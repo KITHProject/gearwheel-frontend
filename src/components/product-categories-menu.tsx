@@ -13,6 +13,7 @@ import { toast } from "@/components/ui/use-toast";
 import AddProductCategoriesModal from "./product-categories-modal";
 import { useState } from "react";
 import ProductCategories from "./product-categories";
+import DeleteProductCategory from "./product-categories-delete";
 
 function ProductCategoriesMenu({ setSearchInput }: any) {
   const searchItems = (searchValue: string) => {
@@ -52,11 +53,13 @@ function ProductCategoriesMenu({ setSearchInput }: any) {
         </Button>
         <ProductCategories />
         <AddProductCategoriesModal />
+        <DeleteProductCategory />
       </div>
       <div className="flex flex-col items-center p-2 sm:flex-row">
         <Button onClick={() => searchItems("")} size="sm" variant="link">
           All
         </Button>
+
         {productsCategoriesMenuData?.map((category: CategoryMenu) => {
           return (
             <DropdownMenu key={category.title}>

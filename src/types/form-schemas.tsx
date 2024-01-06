@@ -55,7 +55,9 @@ export const productCategoriesSchema = z.object({
 export const productCategoriesSchemaOptional = productCategoriesSchema.partial({
   parent_category: true,
 });
-
+export const deleteProductCategorySchema = z.object({
+  id: z.string(),
+});
 export const productsSchema = z.object({
   title: z.string(),
   description: z.string(),

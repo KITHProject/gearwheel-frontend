@@ -20,6 +20,7 @@ import {
 import { Trash } from "lucide-react";
 import { Button } from "./ui/button";
 import { deleteProducts } from "@/actions/delete-products";
+import { useGetProductCategories } from "@/actions/get-product-categories";
 
 type ProductCard = {
   id: string;
@@ -27,7 +28,7 @@ type ProductCard = {
   description: string;
   price: string;
   color: string;
-  category: string;
+  category: number;
 };
 
 function ProductCard({
@@ -38,9 +39,11 @@ function ProductCard({
   color,
   category,
 }: ProductCard) {
+  const { data: productsCategoriesData } = useGetProductCategories();
   const handleDeleteProduct = () => {
     deleteProducts(parseInt(id));
   };
+
   return (
     <Card id={id} className="relative">
       <CardHeader>
@@ -75,12 +78,17 @@ function ProductCard({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
+        {productsCategoriesData.map((product: any) => {
+          return product.id === category ? (
+            <p key={product.id}>{product.title}</p>
+          ) : (
+            ""
+          );
+        })}
+
         <p>{color}</p>
         <p>{price}</p>
       </CardContent>
-      <CardFooter>
-        <p>{category}</p>
-      </CardFooter>
     </Card>
   );
 }

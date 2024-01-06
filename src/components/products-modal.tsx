@@ -34,10 +34,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { useGetProductCategoriesMenu } from "@/actions/get-product-categories-menu";
+
+import { useGetProductCategories } from "@/actions/get-product-categories";
 
 function AddProductsModal() {
-  const { data: productsCategoriesMenuData } = useGetProductCategoriesMenu();
+  const { data: productsCategoriesData } = useGetProductCategories();
 
   const form = useForm<z.infer<typeof productsSchema>>({
     resolver: zodResolver(productsSchema),
@@ -140,18 +141,18 @@ function AddProductsModal() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
-                    <Select onValueChange={field.onChange}>
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a category" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {productsCategoriesMenuData.map((category: any) => {
+                        {productsCategoriesData.map((category: any) => {
                           return (
                             <SelectItem
                               key={category.title}
-                              value={category.title}
+                              value={category.id.toString()}
                             >
                               {category.title}
                             </SelectItem>

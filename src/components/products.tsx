@@ -76,25 +76,19 @@ function Products({ searchInput }: any) {
         <AddProductsModal />
       </div>
       <div className="flex flex-wrap justify-start gap-4">
-        {isLoadingProducts ? (
-          <Skeleton />
-        ) : (
-          <>
-            {productsData.map((product: any) => {
-              return (
-                <ProductCard
-                  id={product.id}
-                  key={product.title}
-                  title={product.title}
-                  description={product.description}
-                  color={product.color}
-                  price={product.price}
-                  category={product.category}
-                />
-              );
-            })}
-          </>
-        )}
+        {productsData?.map((product: any) => {
+          return (
+            <ProductCard
+              id={product.id}
+              key={product.title}
+              title={product.title}
+              description={product.description}
+              color={product.color}
+              price={product.price}
+              category={product.category}
+            />
+          );
+        })}
       </div>
     </>
   );

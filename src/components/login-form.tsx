@@ -19,10 +19,12 @@ import { login } from "@/actions/post-login";
 import { setAuthorized, setUsername } from "@/stores/useAuthorizationStore";
 import { toast } from "./ui/use-toast";
 import LoadingSpinner from "./ui/loading-spinner";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleEyeClick = () => setIsVisible(!isVisible);
 
@@ -41,6 +43,7 @@ export function LoginForm() {
         setIsLoading(false);
         setUsername(data.username);
         setAuthorized(true);
+        navigate("/");
         toast({
           variant: "default",
           title: "Successful login",
