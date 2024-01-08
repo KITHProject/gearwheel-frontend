@@ -8,12 +8,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProductsPage from "./pages/ProductsPage";
-
 import LandingPage from "./pages/LandingPage";
 
 const App = () => {
   const queryClient = new QueryClient();
   const authorized = useAuthorizationStore((state) => state.authorized);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>

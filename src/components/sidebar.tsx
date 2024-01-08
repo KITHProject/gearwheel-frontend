@@ -65,6 +65,7 @@ function Sidebar() {
                 onClick={() => {
                   logoutUser();
                   navigate("/");
+                  localStorage.removeItem("token");
                 }}
               >
                 <LogOut size={16} />
