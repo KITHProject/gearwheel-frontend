@@ -13,6 +13,5 @@ export type Products = {
   title: string;
   description: string;
   price: string;
-  color: string;
   category: string;
 };

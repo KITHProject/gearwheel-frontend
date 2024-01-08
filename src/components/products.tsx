@@ -4,41 +4,10 @@ import { toast } from "./ui/use-toast";
 import AddProductsModal from "./products-modal";
 import ProductCard from "./product-card";
 import { Skeleton } from "./ui/skeleton";
+import { DataTable } from "./data-table";
+import { productsColumns } from "./ui/products-columns";
 
-export type mockProducts = {
-  image: string;
-  title: string;
-  category: string;
-};
-
-const mockProducts = [
-  { image: "/logo192.png", title: "product 1", category: "test1" },
-  { image: "/logo192.png", title: "product 2", category: "test2" },
-  { image: "/logo192.png", title: "product 3", category: "test5" },
-  { image: "/logo192.png", title: "product 4", category: "test5" },
-  { image: "/logo192.png", title: "product 5", category: "test2" },
-  { image: "/logo192.png", title: "product 6", category: "test3" },
-  { image: "/logo192.png", title: "product 7", category: "test1" },
-  { image: "/logo192.png", title: "product 8", category: "test6" },
-  { image: "/logo192.png", title: "product 9", category: "test3" },
-  { image: "/logo192.png", title: "product 10", category: "test1" },
-  { image: "/logo192.png", title: "product 11", category: "test2" },
-  { image: "/logo192.png", title: "product 12", category: "test3" },
-  { image: "/logo192.png", title: "product 13", category: "test6" },
-  { image: "/logo192.png", title: "product 14", category: "test2" },
-  { image: "/logo192.png", title: "product 15", category: "test3" },
-  { image: "/logo192.png", title: "product 16", category: "test1" },
-  { image: "/logo192.png", title: "product 17", category: "test2" },
-  { image: "/logo192.png", title: "product 18", category: "test3" },
-  { image: "/logo192.png", title: "product 19", category: "test1" },
-  { image: "/logo192.png", title: "product 20", category: "test2" },
-  { image: "/logo192.png", title: "product 21", category: "test3" },
-  { image: "/logo192.png", title: "product 22", category: "test1" },
-  { image: "/logo192.png", title: "product 23", category: "test2" },
-  { image: "/logo192.png", title: "product 24", category: "test3" },
-];
-
-function Products({ searchInput }: any) {
+function Products() {
   const {
     data: productsData,
     isLoading: isLoadingProducts,
@@ -75,7 +44,7 @@ function Products({ searchInput }: any) {
         </Button>
         <AddProductsModal />
       </div>
-      <div className="flex flex-wrap justify-start gap-4">
+      {/* <div className="flex flex-wrap justify-start gap-4">
         {productsData?.map((product: any) => {
           return (
             <ProductCard
@@ -83,12 +52,24 @@ function Products({ searchInput }: any) {
               key={product.title}
               title={product.title}
               description={product.description}
-              color={product.color}
               price={product.price}
               category={product.category}
             />
           );
         })}
+      </div> */}
+      <div className="p-4 mx-auto overflow-auto max-w-7xl">
+        {isLoadingProducts ? (
+          <div className="flex items-center justify-center">
+            <Skeleton className="w-[100px] h-[20px] rounded-full" />
+          </div>
+        ) : (
+          <DataTable
+            columns={productsColumns}
+            data={productsData}
+            filter="title"
+          />
+        )}
       </div>
     </>
   );

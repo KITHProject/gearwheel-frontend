@@ -13,7 +13,7 @@ function ProductsPage() {
       <div className="p-4 mx-auto overflow-auto max-w-7xl">
         <div className="flex flex-col items-center justify-center">
           <ProductCategoriesMenu setSearchInput={setSearchInput} />
-          <Products searchInput={searchInput} />
+          <Products />
         </div>
       </div>
     </div>

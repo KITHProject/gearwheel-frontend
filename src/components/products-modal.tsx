@@ -9,7 +9,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { PlusSquare } from "lucide-react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
@@ -18,11 +18,9 @@ import { productsSchema } from "@/types/form-schemas";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
@@ -96,33 +94,7 @@ function AddProductsModal() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="color"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Color</FormLabel>
-                    <Select onValueChange={field.onChange}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a color" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem className="text-blue-500" value="blue">
-                          Blue
-                        </SelectItem>
-                        <SelectItem className="text-red-500" value="red">
-                          Red
-                        </SelectItem>
-                        <SelectItem className="text-green-500" value="green">
-                          Green
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
+
               <FormField
                 control={form.control}
                 name="price"

@@ -1,7 +1,15 @@
 import { mockData } from "@/utils/mockData";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { ArrowUpDown, BadgeCheck, Ban, Check, Trash2, X } from "lucide-react";
+import {
+  ArrowUpDown,
+  BadgeCheck,
+  Ban,
+  Check,
+  Trash,
+  Trash2,
+  X,
+} from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -25,9 +33,31 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { mockProducts } from "../products";
+import { ProductCard } from "../product-card";
+import { deleteProducts } from "@/actions/delete-products";
+import { Checkbox } from "@/components/ui/checkbox";
 
-export const productsColumns: ColumnDef<mockProducts>[] = [
+export const productsColumns: ColumnDef<ProductCard>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+  },
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -57,7 +87,35 @@ export const productsColumns: ColumnDef<mockProducts>[] = [
     },
   },
   {
-    accessorKey: "Category",
+    accessorKey: "description",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Description
+          <ArrowUpDown className="w-4 h-4 ml-2" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "price",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Price
+          <ArrowUpDown className="w-4 h-4 ml-2" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "category",
     header: ({ column }) => {
       return (
         <Button
@@ -74,8 +132,10 @@ export const productsColumns: ColumnDef<mockProducts>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const user = row.original;
-
+      const product = row.original;
+      const handleDeleteProduct = () => {
+        deleteProducts(parseInt(product.id));
+      };
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -94,7 +154,7 @@ export const productsColumns: ColumnDef<mockProducts>[] = [
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="destructive" size="sm">
-                  Delete product <Trash2 className="ml-1 " size={18} />
+                  Delete <Trash2 className="ml-1 " size={18} />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -107,7 +167,9 @@ export const productsColumns: ColumnDef<mockProducts>[] = [
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Continue</AlertDialogAction>
+                  <AlertDialogAction onClick={handleDeleteProduct}>
+                    Continue
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
