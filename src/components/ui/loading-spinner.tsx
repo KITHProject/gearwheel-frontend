@@ -3,7 +3,7 @@ export default function LoadingSpinner() {
     <div role="status" className="flex items-center gap-2">
       <svg
         aria-hidden="true"
-        className="w-6 h-6 text-gray-600 animate-spin  fill-gray-200"
+        className="w-6 h-6 text-gray-600 animate-spin fill-gray-200"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

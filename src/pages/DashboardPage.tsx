@@ -11,8 +11,26 @@ import { RecentSales } from "@/components/recent-sales";
 import { Dashboard } from "@/components/dashboard";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import Sidebar from "@/components/sidebar";
+import { useGetDashboard } from "@/actions/get-dashboard";
+import { toast } from "@/components/ui/use-toast";
+import LoadingSpinner from "@/components/ui/loading-spinner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function DashboardPage() {
+  const {
+    data: dashboardData,
+    isLoading: isLoadingDashboard,
+    error: errorDashboard,
+    refetch: refetchDashboard,
+  } = useGetDashboard();
+
+  if (errorDashboard) {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: `There was a problem with your request (${errorDashboard}).`,
+    });
+  }
   return (
     <div className="relative flex min-h-screen overflow-hidden bg-zinc-100 dark:bg-primary-foreground">
       <Sidebar />
@@ -26,8 +44,8 @@ export default function DashboardPage() {
           </div>
           <div className="space-y-4">
             <div className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <Card>
+              <div className="flex gap-4">
+                <Card className="flex-1">
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                     <CardTitle className="text-sm font-medium">
                       Total Revenue
@@ -46,13 +64,19 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <div className="text-2xl font-bold">
+                      {isLoadingDashboard ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <>${dashboardData.total_revenue}</>
+                      )}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       +20.1% from last month
                     </p>
                   </CardContent>
                 </Card>
-                <Card>
+                {/* <Card>
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                     <CardTitle className="text-sm font-medium">
                       Subscriptions
@@ -73,13 +97,19 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+2350</div>
+                    <div className="text-2xl font-bold">
+                    {isLoadingDashboard ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <>${dashboardData.total_revenue}</>
+                      )}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       +180.1% from last month
                     </p>
                   </CardContent>
-                </Card>
-                <Card>
+                </Card> */}
+                <Card className="flex-1">
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                     <CardTitle className="text-sm font-medium">Sales</CardTitle>
                     <svg
@@ -97,13 +127,20 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+12,234</div>
+                    <div className="text-2xl font-bold">
+                      {" "}
+                      {isLoadingDashboard ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <>${dashboardData.sales}</>
+                      )}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       +19% from last month
                     </p>
                   </CardContent>
                 </Card>
-                <Card>
+                {/* <Card>
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                     <CardTitle className="text-sm font-medium">
                       Active Now
@@ -127,18 +164,22 @@ export default function DashboardPage() {
                       +201 since last hour
                     </p>
                   </CardContent>
-                </Card>
+                </Card> */}
               </div>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
+              <div className="flex flex-col gap-4 lg:flex-row">
+                <Card className="flex-1 col-span-4">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2 mb-4">
-                    <Dashboard />
+                    {isLoadingDashboard ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <Dashboard data={dashboardData.last_months} />
+                    )}
                   </CardContent>
                 </Card>
-                <Card className="col-span-3">
+                <Card className="flex-1 col-span-3">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
                     <CardDescription>
@@ -146,7 +187,15 @@ export default function DashboardPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <RecentSales />
+                    {isLoadingDashboard ? (
+                      <Skeleton />
+                    ) : (
+                      <>
+                        <div className="space-y-8 overflow-auto h-80">
+                          <RecentSales data={dashboardData.recent_sales} />
+                        </div>
+                      </>
+                    )}
                   </CardContent>
                 </Card>
               </div>
