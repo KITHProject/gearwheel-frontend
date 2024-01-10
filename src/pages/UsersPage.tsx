@@ -10,7 +10,7 @@ function UsersPage() {
     <div className="flex bg-zinc-100 dark:bg-primary-foreground">
       <Sidebar />
       <Users />
-      <Button onClick={() => tokenVerify(token)}>Verify</Button>
+      {/* <Button onClick={() => tokenVerify(token)}>Verify</Button> */}
     </div>
   );
 }
