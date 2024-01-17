@@ -19,7 +19,7 @@ function LandingPage() {
   };
   return (
     <div className="h-screen bg-zinc-100 dark:bg-primary-foreground ">
-      <div className="mx-auto max-w-7xl">
+      <div className="px-2 mx-auto max-w-7xl">
         <header className="flex items-center justify-between py-4">
           <Link
             to="/"

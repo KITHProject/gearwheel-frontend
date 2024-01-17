@@ -80,7 +80,6 @@ export function Dashboard({ data }: any) {
           tickFormatter={(value) => `$${value}`}
         />
         <Tooltip />
-
         <Bar
           dataKey="revenue"
           fill="currentColor"

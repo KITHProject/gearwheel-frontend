@@ -32,13 +32,13 @@ export default function DashboardPage() {
     });
   }
   return (
-    <div className="relative flex min-h-screen overflow-hidden bg-zinc-100 dark:bg-primary-foreground">
+    <div className="relative flex bg-zinc-100 dark:bg-primary-foreground">
       <Sidebar />
-      <div className="w-full mx-auto overflow-auto max-w-7xl">
-        <div className="flex flex-col max-h-screen p-8 space-y-4 ">
-          <div className="flex items-center justify-between gap-2 space-y-2">
+      <div className="w-full mx-auto max-w-7xl">
+        <div className="flex flex-col min-h-screen gap-4 p-8 ">
+          <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-2">
               <CalendarDateRangePicker />
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function DashboardPage() {
                 </Card> */}
               </div>
               <div className="flex flex-col gap-4 lg:flex-row">
-                <Card className="flex-1 col-span-4">
+                <Card className="flex-1 col-span-4 ">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
@@ -179,7 +179,7 @@ export default function DashboardPage() {
                     )}
                   </CardContent>
                 </Card>
-                <Card className="flex-1 col-span-3">
+                <Card className="flex-1 col-span-3 ">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
                     <CardDescription>
