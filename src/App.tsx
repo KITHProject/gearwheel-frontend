@@ -1,7 +1,11 @@
-import { useAuthorizationStore } from "./stores/useAuthorizationStore";
+import {
+  logoutUser,
+  setAuthorized,
+  useAuthorizationStore,
+} from "./stores/useAuthorizationStore";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import TestPage from "./pages/TestPage";
 import ErrorPage from "./pages/ErrorPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -9,10 +13,13 @@ import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProductsPage from "./pages/ProductsPage";
 import LandingPage from "./pages/LandingPage";
+import { verifyToken } from "./actions/verify-token";
 
 const App = () => {
   const queryClient = new QueryClient();
   const authorized = useAuthorizationStore((state) => state.authorized);
+  // const token = localStorage.getItem("token");
+  // verifyToken(token);
 
   return (
     <>

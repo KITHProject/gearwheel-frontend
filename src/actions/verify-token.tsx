@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const tokenVerify = async (token: string | null) => {
+export const verifyToken = async (token: string | null) => {
   const response = await axios.post(
     "https://gearwheel-backend.vercel.app/dj-rest-auth/token/verify/",
     token,
@@ -12,5 +12,5 @@ export const tokenVerify = async (token: string | null) => {
     }
   );
   console.log(response);
-  return response.data;
+  return response;
 };
