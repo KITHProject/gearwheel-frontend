@@ -1,11 +1,5 @@
 import { Box, LayoutDashboard, Settings, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const navigationLinks = [
   {
@@ -32,7 +26,7 @@ const navigationLinks = [
 
 function Navbar() {
   return (
-    <>
+    <nav>
       {navigationLinks.map((link) => {
         return (
           <NavLink
@@ -40,24 +34,18 @@ function Navbar() {
             to={link.to}
             className={({ isActive }) =>
               isActive
-                ? "text-2xl flex gap-2 items-center text-primary font-bold"
-                : "text-2xl flex gap-2 items-center font-medium transition-colors text-zinc-500  hover:text-primary"
+                ? "text-4xl md:text-2xl text-primary font-bold"
+                : "text-4xl md:text-2xl font-medium transition-colors text-zinc-500  hover:text-primary"
             }
           >
-            {}
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>{link.icon}</TooltipTrigger>
-                <TooltipContent className="block md:hidden ">
-                  {link.name}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <span className="hidden md:flex"> {link.name}</span>
+            <span className="flex items-center gap-2 pl-20 my-4 md:pl-0">
+              {link.icon}
+              {link.name}
+            </span>
           </NavLink>
         );
       })}
-    </>
+    </nav>
   );
 }
 
