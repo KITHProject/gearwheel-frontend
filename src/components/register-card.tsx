@@ -10,11 +10,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Cog } from "lucide-react";
 import { RegisterForm } from "./register-form";
 import { Link } from "react-router-dom";
+import { Separator } from "./ui/separator";
+import { LoginPageState } from "@/pages/LoginPage";
 
 type Props = {
-  setIsLogin: (isLogin: boolean) => void;
+  setCurrentCard: (currentCard: LoginPageState) => void;
 };
-function RegisterCard({ setIsLogin }: Props) {
+function RegisterCard({ setCurrentCard }: Props) {
   return (
     <Card className="w-full">
       <CardHeader className="relative">
@@ -29,13 +31,15 @@ function RegisterCard({ setIsLogin }: Props) {
       <CardContent>
         <RegisterForm />
       </CardContent>
-      <CardFooter className="flex flex-col my-2">
+      <CardFooter className="flex flex-col">
+        <Separator />
+        <p className="my-4">Do you have an account?</p>
         <Button
-          className="rounded"
-          variant="outline"
-          onClick={() => setIsLogin(true)}
+          onClick={() => setCurrentCard("login")}
+          className="w-full rounded"
+          variant={"outline"}
         >
-          <ArrowLeft size={16} /> Go Back
+          Sign In
         </Button>
       </CardFooter>
     </Card>

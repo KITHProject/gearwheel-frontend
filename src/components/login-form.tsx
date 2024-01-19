@@ -16,7 +16,7 @@ import { useState } from "react";
 import { loginFormSchema } from "@/types/form-schemas";
 import { Eye, EyeOff } from "lucide-react";
 import { login } from "@/actions/post-login";
-import { setAuthorized, setUsername } from "@/stores/useAuthorizationStore";
+import { setAuthorized } from "@/stores/useAuthorizationStore";
 import { toast } from "./ui/use-toast";
 import LoadingSpinner from "./ui/loading-spinner";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,6 @@ export function LoginForm() {
     login(data)
       .then(() => {
         setIsLoading(false);
-        setUsername(data.username);
         setAuthorized(true);
         navigate("/");
         toast({

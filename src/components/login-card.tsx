@@ -11,12 +11,12 @@ import { Separator } from "./ui/separator";
 import { LoginForm } from "./login-form";
 import { Cog } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LoginPageState } from "@/pages/LoginPage";
 
 type Props = {
-  setIsLogin: (isLogin: boolean) => void;
-  setIsForgotPassword: (isForgotPassword: boolean) => void;
+  setCurrentCard: (currentCard: LoginPageState) => void;
 };
-function LoginCard({ setIsLogin, setIsForgotPassword }: Props) {
+function LoginCard({ setCurrentCard }: Props) {
   return (
     <Card className="w-full">
       <CardHeader className="relative">
@@ -31,7 +31,7 @@ function LoginCard({ setIsLogin, setIsForgotPassword }: Props) {
       <CardContent>
         <LoginForm />
         <Button
-          onClick={() => setIsForgotPassword(false)}
+          onClick={() => setCurrentCard("forgotPassword")}
           className="p-0 mt-2"
           variant={"link"}
         >
@@ -42,11 +42,11 @@ function LoginCard({ setIsLogin, setIsForgotPassword }: Props) {
         <Separator />
         <p>Don't have an account?</p>
         <Button
-          onClick={() => setIsLogin(false)}
+          onClick={() => setCurrentCard("register")}
           className="w-full rounded"
           variant={"outline"}
         >
-          SIGN UP FOR GEARWHEEL
+          Sign Up
         </Button>
       </CardFooter>
     </Card>

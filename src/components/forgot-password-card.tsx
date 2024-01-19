@@ -12,12 +12,12 @@ import { Separator } from "./ui/separator";
 import { Cog } from "lucide-react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { LoginPageState } from "@/pages/LoginPage";
 
 type Props = {
-  setIsLogin: (isLogin: boolean) => void;
-  setIsForgotPassword: (isForgotPassword: boolean) => void;
+  setCurrentCard: (currentCard: LoginPageState) => void;
 };
-function ForgotPasswordCard({ setIsLogin, setIsForgotPassword }: Props) {
+function ForgotPasswordCard({ setCurrentCard }: Props) {
   // const form = useForm<z.infer<typeof loginFormSchema>>({
   //   resolver: zodResolver(loginFormSchema),
   //   defaultValues: {
@@ -47,14 +47,11 @@ function ForgotPasswordCard({ setIsLogin, setIsForgotPassword }: Props) {
         <Separator />
         <p>Don't have an account?</p>
         <Button
-          onClick={() => {
-            setIsLogin(false);
-            setIsForgotPassword(false);
-          }}
+          onClick={() => setCurrentCard("register")}
           className="w-full rounded"
           variant={"outline"}
         >
-          SIGN UP FOR GEARWHEEL
+          Sign Up
         </Button>
       </CardFooter>
     </Card>
