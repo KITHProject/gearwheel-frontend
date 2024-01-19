@@ -2,7 +2,7 @@ import api from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const getProductCategoriesMenu = async () => {
-  const response = await api.get("product-categories/menu/");
+  const response = await api.get("/catalog/product-categories/menu/");
   return response.data;
 };
 
