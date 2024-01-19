@@ -1,16 +1,21 @@
-import axios from "axios";
+import { setAuthorized } from "@/stores/useAuthorizationStore";
+import api from "@/utils/api";
+type Token = {
+  token: string | null;
+};
 
-export const verifyToken = async (token: string | null) => {
-  const response = await axios.post(
-    "https://gearwheel-backend.vercel.app/dj-rest-auth/token/verify/",
-    token,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+export const verifyToken = async (token: Token) => {
+  try {
+    const response = await api.post("/token/verify/", token);
+    if (response.status === 200) {
+      setAuthorized(true);
+      console.log(response);
+      console.log("token is valid");
+    } else {
+      setAuthorized(false);
+      console.log("token is invalid");
     }
-  );
-  console.log(response);
-  return response;
+  } catch (error) {
+    console.error("Error verifying token:", error);
+  }
 };

@@ -1,6 +1,5 @@
 import {
-  logoutUser,
-  setAuthorized,
+  setUsername,
   useAuthorizationStore,
 } from "./stores/useAuthorizationStore";
 import LoginPage from "./pages/LoginPage";
@@ -14,12 +13,18 @@ import SettingsPage from "./pages/SettingsPage";
 import ProductsPage from "./pages/ProductsPage";
 import LandingPage from "./pages/LandingPage";
 import { verifyToken } from "./actions/verify-token";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const queryClient = new QueryClient();
   const authorized = useAuthorizationStore((state) => state.authorized);
-  // const token = localStorage.getItem("token");
-  // verifyToken(token);
+
+  useEffect(() => {
+    const token = { token: localStorage.getItem("token") };
+    const user = localStorage.getItem("user");
+    setUsername(user);
+    verifyToken(token);
+  }, []);
 
   return (
     <>

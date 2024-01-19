@@ -10,10 +10,10 @@ export type RegisterInput = {
   password2: string;
 };
 export type AuthorizationStoreState = {
-  username: string;
+  username: string | null;
   authorized: boolean;
 
   logoutUser: () => void;
-  setUsername: (name: string) => void;
+  setUsername: (name: string | null) => void;
   setAuthorized: (flag: boolean) => void;
 };

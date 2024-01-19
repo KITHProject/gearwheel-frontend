@@ -1,4 +1,5 @@
 import { AuthorizationStoreState } from "@/types/authorization.types";
+import { useNavigate } from "react-router-dom";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -12,6 +13,8 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(
         state.authorized = false;
         state.username = "";
       });
+
+      localStorage.removeItem("token");
     },
     setUsername: (name) => {
       set((state) => {
