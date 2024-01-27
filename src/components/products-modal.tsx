@@ -34,30 +34,52 @@ import {
 } from "./ui/select";
 
 import { useGetProductCategories } from "@/actions/get-product-categories";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 function AddProductsModal() {
+  const [open, setOpen] = useState(false);
   const { data: productsCategoriesData } = useGetProductCategories();
+
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: addProductsMutation } = useMutation({
+    mutationFn: postProducts,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
 
   const form = useForm<z.infer<typeof productsSchema>>({
     resolver: zodResolver(productsSchema),
   });
   async function onSubmit(data: z.infer<typeof productsSchema>) {
-    postProducts(data);
+    await addProductsMutation(data)
+      .then(() => {
+        toast({
+          title: "You submitted the following values:",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-secondary">
+                {JSON.stringify(data, null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+      })
+      .catch((error) => {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `There was a problem with your request (${error.message}).`,
+        });
+      });
 
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-secondary">
-            {JSON.stringify(data, null, 2)}
-          </code>
-        </pre>
-      ),
-    });
+    setOpen(false);
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="sm" variant="default">
           Add product

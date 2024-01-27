@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Input } from "@/components/ui/input";
-import { PlusSquare } from "lucide-react";
+import { Loader2, PlusSquare } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -34,9 +34,23 @@ import {
 } from "./ui/select";
 
 import { useGetProductCategories } from "@/actions/get-product-categories";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 function AddProductCategoriesModal() {
+  const [open, setOpen] = useState(false);
+
   const { data: productsCategoriesData } = useGetProductCategories();
+
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: addCategoriesMutation } = useMutation({
+    mutationFn: postProductCategories,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["product-categories"] });
+      queryClient.invalidateQueries({ queryKey: ["product-categories-menu"] });
+    },
+  });
 
   const form = useForm<z.infer<typeof productCategoriesSchemaOptional>>({
     resolver: zodResolver(productCategoriesSchemaOptional),
@@ -49,22 +63,32 @@ function AddProductCategoriesModal() {
   async function onSubmit(
     data: z.infer<typeof productCategoriesSchemaOptional>
   ) {
-    postProductCategories(data);
-    // .then(() => {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-secondary">
-    //         {JSON.stringify(data, null, 2)}
-    //       </code>
-    //     </pre>
-    //   ),
-    // });
+    await addCategoriesMutation(data)
+      .then(() => {
+        toast({
+          title: "You submitted the following values:",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-secondary">
+                {JSON.stringify(data, null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+      })
+      .catch((error) => {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `There was a problem with your request (${error.message}).`,
+        });
+      });
+
+    setOpen(false);
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="sm" variant="default">
           Add category
@@ -81,7 +105,7 @@ function AddProductCategoriesModal() {
                 control={form.control}
                 name="title"
                 render={({ field }) => (
-                  <FormItem className="flex items-center gap-2 px-4">
+                  <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
                       <Input required placeholder="Category title" {...field} />
@@ -94,24 +118,28 @@ function AddProductCategoriesModal() {
                 control={form.control}
                 name="primary"
                 render={({ field }) => (
-                  <FormItem className="flex items-center gap-2 px-4">
+                  <FormItem>
                     <FormLabel>Primary</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
                         className="flex space-x-1"
                       >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem>
                           <FormControl>
                             <RadioGroupItem value="true" />
                           </FormControl>
-                          <FormLabel className="font-normal">true</FormLabel>
+                          <FormLabel className="ml-2 font-normal">
+                            true
+                          </FormLabel>
                         </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem>
                           <FormControl>
                             <RadioGroupItem value="false" />
                           </FormControl>
-                          <FormLabel className="font-normal">false</FormLabel>
+                          <FormLabel className="ml-2 font-normal">
+                            false
+                          </FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>

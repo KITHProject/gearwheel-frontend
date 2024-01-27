@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 function DashboardLayout() {
   return (
     <>
-      <div className="relative flex flex-col h-screen md:flex-row md:overflow-hidden bg-zinc-100 dark:bg-primary-foreground">
+      <div className="relative flex flex-col h-screen md:flex-row bg-zinc-100 dark:bg-primary-foreground">
         <Sidebar />
         <div className="flex flex-col w-full mx-auto">
           <Header />

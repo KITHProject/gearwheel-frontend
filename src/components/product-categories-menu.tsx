@@ -1,99 +1,57 @@
 import { useGetProductCategoriesMenu } from "@/actions/get-product-categories-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { CategoryMenu } from "@/types/types";
-import { Button } from "@/components/ui/button";
-import LoadingSpinner from "@/components/ui/loading-spinner";
-import { toast } from "@/components/ui/use-toast";
 import AddProductCategoriesModal from "./product-categories-modal";
-import { useState } from "react";
-import ProductCategories from "./product-categories";
 import DeleteProductCategory from "./product-categories-delete";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function ProductCategoriesMenu({ setSearchInput }: any) {
   const searchItems = (searchValue: string) => {
     setSearchInput(searchValue);
   };
 
-  const {
-    data: productsCategoriesMenuData,
-    isLoading: isLoadingProductCategoriesMenu,
-    error: errorProductCategoriesMenu,
-    refetch: refetchProductCategoriesMenu,
-  } = useGetProductCategoriesMenu();
+  const { data: productsCategoriesMenuData } = useGetProductCategoriesMenu();
 
-  // console.log(productsCategoriesMenuData);
   return (
     <>
-      <div className="flex flex-col items-center gap-2 sm:flex-row">
-        <Button
-          size="sm"
-          variant="default"
-          onClick={() => {
-            refetchProductCategoriesMenu();
-            if (errorProductCategoriesMenu) {
-              toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: `There was a problem with your request (${errorProductCategoriesMenu?.message}).`,
-              });
-            }
-          }}
-        >
-          {isLoadingProductCategoriesMenu ? (
-            <LoadingSpinner />
-          ) : (
-            "Get categories menu"
-          )}
-        </Button>
-        <ProductCategories />
-        <AddProductCategoriesModal />
-        <DeleteProductCategory />
-      </div>
-      <div className="flex flex-col items-center p-2 sm:flex-row">
-        <Button onClick={() => searchItems("")} size="sm" variant="link">
-          All
-        </Button>
-
-        {productsCategoriesMenuData?.map((category: CategoryMenu) => {
-          return (
-            <DropdownMenu key={category.title}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  onClick={() => searchItems(category.title)}
-                  variant="link"
-                >
-                  {category.title}
-                </Button>
-              </DropdownMenuTrigger>
-              {category.children.length > 0 ? (
-                <DropdownMenuContent>
-                  <DropdownMenuRadioGroup>
+      <div className="flex flex-col items-start justify-between w-full gap-2 p-2 md:items-center sm:flex-row">
+        <Select>
+          <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">ALL</SelectItem>
+            {productsCategoriesMenuData?.map((category: CategoryMenu) => {
+              return (
+                <>
+                  <SelectGroup key={category.title}>
+                    <SelectItem value={category.title}>
+                      {category.title}
+                    </SelectItem>
                     {category.children.map((child: any) => {
                       return (
-                        <DropdownMenuRadioItem
-                          key={child.title}
-                          onClick={() => searchItems(child.title)}
-                          className="cursor-pointer"
-                          value={child}
-                        >
+                        <SelectItem key={child.title} value={child.title}>
                           {child.title}
-                        </DropdownMenuRadioItem>
+                        </SelectItem>
                       );
                     })}
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuContent>
-              ) : (
-                ""
-              )}
-            </DropdownMenu>
-          );
-        })}
+                  </SelectGroup>
+                </>
+              );
+            })}
+          </SelectContent>
+        </Select>
+        <div className="flex gap-2">
+          <AddProductCategoriesModal />
+          <DeleteProductCategory />
+        </div>
       </div>
     </>
   );

@@ -5,10 +5,11 @@ import { Separator } from "./ui/separator";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { useMediaQuery } from "usehooks-ts";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 export default function Sidebar() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
+  const [open, setOpen] = useState(false);
   if (isDesktop) {
     return (
       <div className="my-4 ml-4 mr-0 border shadow rounded-xl bg-primary-foreground">
@@ -37,7 +38,7 @@ export default function Sidebar() {
     );
   }
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger>
         <div className="absolute p-2 rounded-full left-6 top-6 z-1 hover:bg-zinc-300">
           <Menu />

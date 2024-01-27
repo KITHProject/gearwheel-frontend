@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Input } from "@/components/ui/input";
 
 import { DataTablePagination } from "./ui/table-pagination";
@@ -26,12 +26,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   filter: string;
+  element?: ReactNode;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   filter,
+  element,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -55,7 +57,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center pb-4 md:pl-0">
+      <div className="flex items-center justify-between pb-4 md:pl-0">
         <Input
           placeholder={`Filter ${filter}...`}
           value={(table.getColumn(filter)?.getFilterValue() as string) ?? ""}
@@ -64,6 +66,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        {element}
       </div>
 
       <div className="mb-2 border rounded">

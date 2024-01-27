@@ -41,7 +41,7 @@ function DeleteProductCategory() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button size="sm" variant="default">
+          <Button size="sm" variant="destructive">
             Delete category
           </Button>
         </DialogTrigger>

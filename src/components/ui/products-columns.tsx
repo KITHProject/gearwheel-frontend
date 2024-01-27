@@ -6,6 +6,7 @@ import {
   BadgeCheck,
   Ban,
   Check,
+  Pencil,
   Trash,
   Trash2,
   X,
@@ -48,6 +49,7 @@ export const productsColumns: ColumnDef<ProductCard>[] = [
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
+        className="border-secondary data-[state=checked]:bg-secondary data-[state=checked]:text-secondary-foreground"
       />
     ),
     cell: ({ row }) => (
@@ -147,15 +149,15 @@ export const productsColumns: ColumnDef<ProductCard>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem className="cursor-pointer">
-              Edit product
+              <Pencil className="mr-1 " size={18} />
+              Edit
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="destructive" size="sm">
-                  Delete <Trash2 className="ml-1 " size={18} />
-                </Button>
+                <DropdownMenuItem className="cursor-pointer">
+                  <Trash2 className="mr-1 " size={18} /> Delete
+                </DropdownMenuItem>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
