@@ -1,4 +1,3 @@
-import { setUsername } from "@/stores/useAuthorizationStore";
 import { LoginInput } from "@/types/authorization.types";
 
 import api from "@/utils/api";

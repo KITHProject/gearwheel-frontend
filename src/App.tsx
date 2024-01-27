@@ -1,7 +1,7 @@
 import { useAuthorizationStore } from "./stores/useAuthorizationStore";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TestPage from "./pages/TestPage";
 import ErrorPage from "./pages/ErrorPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     // setUsername(user);
     verifyToken(token);
-  }, []);
+  }, [token]);
 
   return (
     <>
