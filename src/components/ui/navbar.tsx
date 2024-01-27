@@ -26,7 +26,7 @@ const navigationLinks = [
 
 function Navbar() {
   return (
-    <nav>
+    <nav className="w-40">
       {navigationLinks.map((link) => {
         return (
           <NavLink

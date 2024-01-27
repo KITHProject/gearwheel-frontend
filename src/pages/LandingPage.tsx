@@ -1,22 +1,9 @@
 import { ModeToggle } from "@/components/mode-toggle";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Cog } from "lucide-react";
-
 import { Link } from "react-router-dom";
 
 function LandingPage() {
-  const handleClickScroll = () => {
-    const element = document.getElementById("section-2");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   return (
     <div className="h-screen bg-zinc-100 dark:bg-primary-foreground ">
       <div className="px-2 mx-auto max-w-7xl">
@@ -44,28 +31,10 @@ function LandingPage() {
               </span>
             </h1>
             <h2 className="text-md">BOTTOM TEXT.</h2>
-            <Button
-            // onClick={handleClickScroll}
-            >
+            <Button>
               <Link to="/login"> Get started</Link>
             </Button>
           </section>
-          {/* <section id="section-2" className="w-1/2 h-screen mx-auto">
-            <Accordion type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>idk.</AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>What is the purpose?</AccordionTrigger>
-                <AccordionContent>Yes.</AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Am I dumb?</AccordionTrigger>
-                <AccordionContent>Yes.</AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </section> */}
         </main>
       </div>
     </div>

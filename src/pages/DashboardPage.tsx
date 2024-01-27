@@ -5,12 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-
 import { RecentSales } from "@/components/recent-sales";
 import { Dashboard } from "@/components/dashboard";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
-import Sidebar from "@/components/sidebar";
 import { useGetDashboard } from "@/actions/get-dashboard";
 import { toast } from "@/components/ui/use-toast";
 import LoadingSpinner from "@/components/ui/loading-spinner";
@@ -32,51 +29,48 @@ export default function DashboardPage() {
     });
   }
   return (
-    <div className="relative flex bg-zinc-100 dark:bg-primary-foreground">
-      <Sidebar />
-      <div className="w-full mx-auto max-w-7xl">
-        <div className="flex flex-col min-h-screen gap-4 p-8 ">
-          <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-            <div className="flex items-center gap-2">
-              <CalendarDateRangePicker />
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div className="space-y-4">
-              <div className="flex gap-4">
-                <Card className="flex-1">
-                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">
-                      Total Revenue
-                    </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-muted-foreground"
-                    >
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {isLoadingDashboard ? (
-                        <LoadingSpinner />
-                      ) : (
-                        <>${dashboardData.total_revenue}</>
-                      )}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
-                  </CardContent>
-                </Card>
-                {/* <Card>
+    <>
+      <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <div className="flex items-center gap-2">
+          <CalendarDateRangePicker />
+        </div>
+      </div>
+      <div className="space-y-4">
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <Card className="flex-1">
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">
+                  Total Revenue
+                </CardTitle>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-muted-foreground"
+                >
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {isLoadingDashboard ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <>${dashboardData.total_revenue}</>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  +20.1% from last month
+                </p>
+              </CardContent>
+            </Card>
+            {/* <Card>
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                     <CardTitle className="text-sm font-medium">
                       Subscriptions
@@ -109,38 +103,38 @@ export default function DashboardPage() {
                     </p>
                   </CardContent>
                 </Card> */}
-                <Card className="flex-1">
-                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">Sales</CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-muted-foreground"
-                    >
-                      <rect width="20" height="14" x="2" y="5" rx="2" />
-                      <path d="M2 10h20" />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {" "}
-                      {isLoadingDashboard ? (
-                        <LoadingSpinner />
-                      ) : (
-                        <>${dashboardData.sales}</>
-                      )}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      +19% from last month
-                    </p>
-                  </CardContent>
-                </Card>
-                {/* <Card>
+            <Card className="flex-1">
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-muted-foreground"
+                >
+                  <rect width="20" height="14" x="2" y="5" rx="2" />
+                  <path d="M2 10h20" />
+                </svg>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {" "}
+                  {isLoadingDashboard ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <>${dashboardData.sales}</>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  +19% from last month
+                </p>
+              </CardContent>
+            </Card>
+            {/* <Card>
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                     <CardTitle className="text-sm font-medium">
                       Active Now
@@ -165,44 +159,42 @@ export default function DashboardPage() {
                     </p>
                   </CardContent>
                 </Card> */}
-              </div>
-              <div className="flex flex-col gap-4 lg:flex-row">
-                <Card className="flex-1 col-span-4 ">
-                  <CardHeader>
-                    <CardTitle>Overview</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pl-2 mb-4">
-                    {isLoadingDashboard ? (
-                      <LoadingSpinner />
-                    ) : (
-                      <Dashboard data={dashboardData.last_months} />
-                    )}
-                  </CardContent>
-                </Card>
-                <Card className="flex-1 col-span-3 ">
-                  <CardHeader>
-                    <CardTitle>Recent Sales</CardTitle>
-                    <CardDescription>
-                      You made 265 sales this month.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {isLoadingDashboard ? (
-                      <Skeleton />
-                    ) : (
-                      <>
-                        <div className="space-y-8 overflow-auto h-80">
-                          <RecentSales data={dashboardData.recent_sales} />
-                        </div>
-                      </>
-                    )}
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+          </div>
+          <div className="flex flex-col gap-4 lg:flex-row">
+            <Card className="flex-1 col-span-4 ">
+              <CardHeader>
+                <CardTitle>Overview</CardTitle>
+              </CardHeader>
+              <CardContent className="pl-2 mb-4">
+                {isLoadingDashboard ? (
+                  <LoadingSpinner />
+                ) : (
+                  <Dashboard data={dashboardData.last_months} />
+                )}
+              </CardContent>
+            </Card>
+            <Card className="flex-1 col-span-3 ">
+              <CardHeader>
+                <CardTitle>Recent Sales</CardTitle>
+                <CardDescription>
+                  You made 265 sales this month.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {isLoadingDashboard ? (
+                  <Skeleton />
+                ) : (
+                  <>
+                    <div className="space-y-8 overflow-auto h-80">
+                      <RecentSales data={dashboardData.recent_sales} />
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
