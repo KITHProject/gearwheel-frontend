@@ -6,10 +6,10 @@ function ProductsPage() {
   const [searchInput, setSearchInput] = useState("");
 
   return (
-    <div className="flex flex-col items-center ">
+    <>
       <ProductCategoriesMenu setSearchInput={setSearchInput} />
       <Products />
-    </div>
+    </>
   );
 }
 

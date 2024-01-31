@@ -12,7 +12,7 @@ export default function Sidebar() {
   const [open, setOpen] = useState(false);
   if (isDesktop) {
     return (
-      <div className="my-4 ml-4 mr-0 border shadow rounded-xl bg-primary-foreground">
+      <div className="my-4 ml-4 mr-0 border shadow  rounded-xl bg-primary-foreground">
         <div className="flex flex-col px-1 py-2 mx-1">
           <div>
             <div className="flex items-center justify-center px-2">

@@ -6,14 +6,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 function DashboardLayout() {
   return (
     <>
-      <div className="relative flex flex-col h-screen md:flex-row bg-zinc-100 dark:bg-primary-foreground">
+      <div className="relative flex flex-row h-screen bg-zinc-100 dark:bg-card">
         <Sidebar />
-        <div className="flex flex-col w-full mx-auto">
+        <div className="flex flex-col w-full h-full md:w-[71%] lg:w-full">
           <Header />
           <div className="mx-4 mt-0 mb-4 border shadow rounded-xl bg-primary-foreground">
-            <ScrollArea className="p-4 border rounded-md ">
+            <div className="p-4 border rounded-md ">
               <Outlet />
-            </ScrollArea>
+            </div>
           </div>
         </div>
       </div>

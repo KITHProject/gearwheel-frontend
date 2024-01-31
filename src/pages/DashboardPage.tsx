@@ -18,7 +18,6 @@ export default function DashboardPage() {
     data: dashboardData,
     isLoading: isLoadingDashboard,
     error: errorDashboard,
-    refetch: refetchDashboard,
   } = useGetDashboard();
 
   if (errorDashboard) {
@@ -30,7 +29,7 @@ export default function DashboardPage() {
   }
   return (
     <>
-      <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+      <div className="flex flex-col items-center justify-between gap-2 my-2 md:flex-row">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex items-center gap-2">
           <CalendarDateRangePicker />

@@ -23,14 +23,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { deleteProductCategorySchema } from "@/types/form-schemas";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Trash } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function DeleteProductCategory() {
   const { data: productsCategoriesData } = useGetProductCategories();
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: deleteProductCategoriesMutation } = useMutation({
+    mutationFn: deleteProductCategories,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["product-categories"] });
+    },
+  });
+
   const handleDeleteCategories = (id: string) => {
-    deleteProductCategories(parseInt(id));
-    console.log(id);
-    console.log(productsCategoriesData);
+    deleteProductCategoriesMutation(parseInt(id));
   };
+
   const form = useForm<z.infer<typeof deleteProductCategorySchema>>({
     resolver: zodResolver(deleteProductCategorySchema),
   });

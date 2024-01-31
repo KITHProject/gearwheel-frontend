@@ -21,9 +21,9 @@ function ProductCategoriesMenu({ setSearchInput }: any) {
 
   return (
     <>
-      <div className="flex flex-col items-start justify-between w-full gap-2 p-2 md:items-center sm:flex-row">
+      <div className="flex flex-col items-center justify-between gap-4 p-2 md:flex-row">
         <Select>
-          <SelectTrigger className="w-[280px]">
+          <SelectTrigger className="sm:w-[280px]">
             <SelectValue placeholder="Select a category" />
           </SelectTrigger>
           <SelectContent>
@@ -48,7 +48,7 @@ function ProductCategoriesMenu({ setSearchInput }: any) {
             })}
           </SelectContent>
         </Select>
-        <div className="flex gap-2">
+        <div className="flex flex-col w-full gap-2 sm:w-auto sm:flex-row">
           <AddProductCategoriesModal />
           <DeleteProductCategory />
         </div>

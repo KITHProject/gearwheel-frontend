@@ -8,9 +8,11 @@ import AddProductsModal from "./products-modal";
 function Products() {
   const { data: productsData, isLoading: isLoadingProducts } = useGetProducts();
 
+  console.log(productsData);
+
   return (
     <>
-      <div className="w-full p-2 mx-auto ">
+      <div className="p-2 mx-auto ">
         <div className="">
           {isLoadingProducts ? (
             <div className="flex items-center justify-center">

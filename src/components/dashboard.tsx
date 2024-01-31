@@ -7,9 +7,14 @@ import {
   YAxis,
 } from "recharts";
 
-export function Dashboard({ data }: any) {
-  console.log(data);
+type DashboardData<T> = {
+  data: T[];
+};
 
+const tooltipStyle = {
+  color: "black",
+};
+export function Dashboard<T>({ data }: DashboardData<T>) {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
@@ -27,7 +32,7 @@ export function Dashboard({ data }: any) {
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
         />
-        <Tooltip />
+        <Tooltip contentStyle={tooltipStyle} />
         <Bar
           dataKey="revenue"
           fill="currentColor"
