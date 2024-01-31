@@ -1,4 +1,7 @@
-import { useAuthorizationStore } from "./stores/useAuthorizationStore";
+import {
+  setUsername,
+  useAuthorizationStore,
+} from "./stores/useAuthorizationStore";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -17,10 +20,10 @@ const App = () => {
   const queryClient = new QueryClient();
   const authorized = useAuthorizationStore((state) => state.authorized);
   const token = { token: localStorage.getItem("token") };
-  // const user = localStorage.getItem("user");
+  const user = localStorage.getItem("user");
+  setUsername(user);
 
   useEffect(() => {
-    // setUsername(user);
     verifyToken(token);
   }, [token]);
 
