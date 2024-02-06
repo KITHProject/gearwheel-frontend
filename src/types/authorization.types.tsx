@@ -10,10 +10,12 @@ export type RegisterInput = {
   password2: string;
 };
 export type AuthorizationStoreState = {
-  username: string | null;
+  username: string;
   authorized: boolean;
+  isStaff: boolean;
 
   logoutUser: () => void;
-  setUsername: (name: string | null) => void;
+  setUsername: (name: string) => void;
   setAuthorized: (flag: boolean) => void;
+  setIsStaff: (flag: boolean) => void;
 };

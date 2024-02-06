@@ -7,14 +7,16 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(
   immer((set) => ({
     username: "",
     authorized: false,
-
+    isStaff: false,
     logoutUser: () => {
       set((state) => {
         state.authorized = false;
         state.username = "";
       });
 
+      localStorage.removeItem("user");
       localStorage.removeItem("token");
+      localStorage.removeItem("staff");
     },
     setUsername: (name) => {
       set((state) => {
@@ -26,8 +28,13 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(
         state.authorized = flag;
       });
     },
+    setIsStaff: (flag) => {
+      set((state) => {
+        state.isStaff = flag;
+      });
+    },
   }))
 );
 
-export const { logoutUser, setUsername, setAuthorized } =
+export const { logoutUser, setUsername, setAuthorized, setIsStaff } =
   useAuthorizationStore.getState();

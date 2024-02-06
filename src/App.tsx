@@ -15,14 +15,17 @@ import LandingPage from "./pages/LandingPage";
 import { verifyToken } from "./actions/verify-token";
 import { useEffect } from "react";
 import DashboardLayout from "./pages/DashboardLayout";
+import ShopPage from "./pages/ShopPage";
+import ShopPageLayout from "./pages/ShopPageLayout";
 
 const App = () => {
   const queryClient = new QueryClient();
   const authorized = useAuthorizationStore((state) => state.authorized);
   const token = { token: localStorage.getItem("token") };
-  const user = localStorage.getItem("user");
-  setUsername(user);
+  const user = localStorage.getItem("user") as string;
+  const staff = Boolean(localStorage.getItem("staff"));
 
+  setUsername(user);
   useEffect(() => {
     verifyToken(token);
   }, []);
@@ -34,13 +37,23 @@ const App = () => {
           <Routes>
             {authorized ? (
               <>
-                <Route path="/" element={<DashboardLayout />}>
-                  <Route index element={<DashboardPage />} />
-                  <Route path="/test" element={<TestPage />} />
-                  <Route path="/users" element={<UsersPage />} />
-                  <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/settings" element={<SettingsPage />} />
-                </Route>
+                {staff ? (
+                  <>
+                    <Route path="/" element={<DashboardLayout />}>
+                      <Route index element={<DashboardPage />} />
+                      <Route path="/test" element={<TestPage />} />
+                      <Route path="/users" element={<UsersPage />} />
+                      <Route path="/products" element={<ProductsPage />} />
+                      <Route path="/settings" element={<SettingsPage />} />
+                    </Route>
+                  </>
+                ) : (
+                  <>
+                    <Route path="/" element={<ShopPageLayout />}>
+                      <Route index element={<ShopPage />} />
+                    </Route>
+                  </>
+                )}
               </>
             ) : (
               <>
