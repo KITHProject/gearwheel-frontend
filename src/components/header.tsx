@@ -18,6 +18,8 @@ import {
 function Header() {
   const username = useAuthorizationStore((state) => state.username);
   const navigate = useNavigate();
+  const firstLetterOfUsername = Array.from(username)[0].toUpperCase();
+
   return (
     <header className="flex justify-end m-4 border shadow rounded-xl bg-primary-foreground">
       <div className="flex items-center px-4 h-14">
@@ -26,8 +28,7 @@ function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>{firstLetterOfUsername}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

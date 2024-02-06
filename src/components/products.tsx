@@ -8,8 +8,6 @@ import AddProductsModal from "./products-modal";
 function Products() {
   const { data: productsData, isLoading: isLoadingProducts } = useGetProducts();
 
-  console.log(productsData);
-
   return (
     <>
       <div className="p-2 mx-auto ">

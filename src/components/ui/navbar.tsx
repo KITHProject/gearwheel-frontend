@@ -34,11 +34,11 @@ function Navbar() {
             to={link.to}
             className={({ isActive }) =>
               isActive
-                ? "text-4xl md:text-2xl text-primary font-bold"
-                : "text-4xl md:text-2xl font-medium transition-colors text-zinc-500  hover:text-primary"
+                ? "text-5xl md:text-2xl text-primary font-bold"
+                : "text-5xl md:text-2xl font-medium transition-colors text-zinc-500  hover:text-primary"
             }
           >
-            <span className="flex items-center gap-2 pl-20 my-4 md:pl-0">
+            <span className="flex items-center gap-2 pl-20 my-6 md:pl-0">
               {link.icon}
               {link.name}
             </span>
