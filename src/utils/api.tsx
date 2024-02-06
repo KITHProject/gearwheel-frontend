@@ -1,12 +1,10 @@
 import Axios from "axios";
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 const api = Axios.create({
   baseURL: "https://gearwheel-backend.vercel.app/",
   headers: {
     "Content-Type": "application/json",
     accept: "application/json",
-    HTTP_GEARWHEEL: API_KEY,
   },
 });
 
@@ -22,7 +20,9 @@ api.interceptors.response.use(
 );
 api.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
+  const API_KEY = process.env.REACT_APP_API_KEY;
   config.headers.Authorization = token ? `Bearer ${token}` : "";
+  config.headers.GEARWHEEL = API_KEY;
   return config;
 });
 
