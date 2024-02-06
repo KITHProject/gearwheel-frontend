@@ -176,7 +176,7 @@ export default function DashboardPage() {
               <CardHeader>
                 <CardTitle>Recent Sales</CardTitle>
                 <CardDescription>
-                  You made 265 sales this month.
+                  You made dupa sales this month.
                 </CardDescription>
               </CardHeader>
               <CardContent>

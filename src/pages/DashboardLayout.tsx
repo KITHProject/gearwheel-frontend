@@ -1,7 +1,6 @@
 import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
 import { Outlet } from "react-router-dom";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 function DashboardLayout() {
   return (

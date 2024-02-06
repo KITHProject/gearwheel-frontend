@@ -24,15 +24,17 @@ function ProductCategoriesMenu({ setSearchInput }: any) {
       <div className="flex flex-col items-center justify-between gap-4 p-2 md:flex-row">
         <Select>
           <SelectTrigger className="sm:w-[280px]">
-            <SelectValue placeholder="Select a category" />
+            <SelectValue key={"placeholder"} placeholder="Select a category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">ALL</SelectItem>
+            <SelectItem key={"all"} value="all">
+              ALL
+            </SelectItem>
             {productsCategoriesMenuData?.map((category: CategoryMenu) => {
               return (
                 <>
-                  <SelectGroup key={category.title}>
-                    <SelectItem value={category.title}>
+                  <SelectGroup>
+                    <SelectItem key={category.title} value={category.title}>
                       {category.title}
                     </SelectItem>
                     {category.children.map((child: any) => {

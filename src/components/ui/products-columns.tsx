@@ -119,7 +119,21 @@ export const productsColumns: ColumnDef<ProductCard>[] = [
     },
   },
   {
-    accessorKey: "category",
+    accessorKey: "quantity",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Quantity
+          <ArrowUpDown className="w-4 h-4 ml-2" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "category.title",
     header: ({ column }) => {
       return (
         <Button
@@ -132,7 +146,20 @@ export const productsColumns: ColumnDef<ProductCard>[] = [
       );
     },
   },
-
+  {
+    accessorKey: "available",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Available
+          <ArrowUpDown className="w-4 h-4 ml-2" />
+        </Button>
+      );
+    },
+  },
   {
     id: "actions",
     cell: ({ row }) => {
