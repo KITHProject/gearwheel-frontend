@@ -1,5 +1,5 @@
 function ShopPage() {
-  return <div>Siema jestem trepem</div>;
+  return <div>Hello World</div>;
 }
 
 export default ShopPage;
