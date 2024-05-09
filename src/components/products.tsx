@@ -13,8 +13,11 @@ function Products() {
       <div className="p-2 mx-auto ">
         <div className="">
           {isLoadingProducts ? (
-            <div className="flex items-center justify-center">
-              <Skeleton className="w-[100px] h-[20px] rounded-full" />
+            <div className="flex flex-col items-center justify-center gap-2">
+              <Skeleton className="w-full h-[20px] rounded-full" />
+              <Skeleton className="w-full h-[20px] rounded-full" />
+              <Skeleton className="w-full h-[20px] rounded-full" />
+              <Skeleton className="w-full h-[20px] rounded-full" />
             </div>
           ) : (
             <DataTable
