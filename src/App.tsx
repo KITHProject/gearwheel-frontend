@@ -15,15 +15,12 @@ import LandingPage from "./pages/LandingPage";
 import { verifyToken } from "./actions/verify-token";
 import { useEffect } from "react";
 import DashboardLayout from "./pages/DashboardLayout";
-import ShopPage from "./pages/ShopPage";
-import ShopPageLayout from "./pages/ShopPageLayout";
 
 const App = () => {
   const queryClient = new QueryClient();
   const authorized = useAuthorizationStore((state) => state.authorized);
   const token = { token: localStorage.getItem("token") };
   const user = localStorage.getItem("user") as string;
-  // const staff = Boolean(localStorage.getItem("staff"));
 
   setUsername(user);
   useEffect(() => {

@@ -3,7 +3,7 @@ import {
   useAuthorizationStore,
 } from "@/stores/useAuthorizationStore";
 import { ModeToggle } from "./mode-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
