@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { CategoryDropdown } from "./category-dropdown";
 

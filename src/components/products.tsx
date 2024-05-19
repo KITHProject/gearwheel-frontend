@@ -1,9 +1,7 @@
 import { Skeleton } from "./ui/skeleton";
 import { DataTable } from "./data-table";
 import { productsColumns } from "./ui/products-columns";
-import AddProductsModal from "./products-modal";
 import { useGetProducts } from "@/actions/get-products";
-import ProductCategoriesMenu from "./product-categories-menu";
 
 function Products() {
   const { data: productsData, isLoading: isLoadingProducts } = useGetProducts();
