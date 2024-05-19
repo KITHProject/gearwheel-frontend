@@ -9,11 +9,8 @@ export const verifyToken = async (token: Token) => {
     const response = await api.post("/token/verify/", token);
     if (response.status === 200) {
       setAuthorized(true);
-      console.log(response);
-      console.log("token is valid");
     } else {
       setAuthorized(false);
-      console.log("token is invalid");
     }
   } catch (error) {
     console.error("Error verifying token:", error);

@@ -25,7 +25,7 @@ const App = () => {
   setUsername(user);
   useEffect(() => {
     verifyToken(token);
-  }, []);
+  });
 
   return (
     <>
