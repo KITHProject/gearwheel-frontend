@@ -1,28 +1,14 @@
-import { mockData } from "@/utils/mockData";
 import { ColumnDef } from "@tanstack/react-table";
-
-import {
-  ArrowUpDown,
-  BadgeCheck,
-  Ban,
-  Check,
-  Pencil,
-  Trash,
-  Trash2,
-  X,
-} from "lucide-react";
+import { ArrowUpDown, Trash2 } from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,33 +21,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { ProductCard } from "../product-card";
-
-import { Checkbox } from "@/components/ui/checkbox";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import DeleteProducts from "../products-delete";
 
 export const productsColumns: ColumnDef<ProductCard>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        className="border-secondary data-[state=checked]:bg-secondary data-[state=checked]:text-secondary-foreground"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-  },
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -179,13 +141,13 @@ export const productsColumns: ColumnDef<ProductCard>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem className="cursor-pointer">
+              {/* <DropdownMenuItem className="cursor-pointer">
                 <Pencil className="mr-1 " size={18} />
                 Edit
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <AlertDialogTrigger asChild>
-                <DropdownMenuItem className="cursor-pointer">
-                  <Trash2 className="mr-1 " size={18} /> Delete
+                <DropdownMenuItem className="cursor-pointer focus:text-red-500 ">
+                  <Trash2 className="mr-1 " size={18} /> Delete product
                 </DropdownMenuItem>
               </AlertDialogTrigger>
             </DropdownMenuContent>
