@@ -18,19 +18,18 @@ import {
 } from "@/components/ui/table";
 import { ReactNode, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { CategoryDropdown } from "./category-dropdown";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   filter: string;
-  element?: ReactNode;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   filter,
-  element,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -63,7 +62,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        {element}
+        {filter === "email" ? <></> : <CategoryDropdown table={table} />}
       </div>
 
       <div className="mb-2 border rounded">
