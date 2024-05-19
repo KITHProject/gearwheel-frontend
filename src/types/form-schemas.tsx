@@ -64,3 +64,12 @@ export const productsSchema = z.object({
   price: z.string(),
   category: z.string(),
 });
+
+export const nameSchema = z.object({
+  name: z
+    .string()
+    .min(2, {
+      message: "Name must be at least 3 characters.",
+    })
+    .max(30),
+});
