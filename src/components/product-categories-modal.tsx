@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Input } from "@/components/ui/input";
-import { Loader2, PlusSquare } from "lucide-react";
+import { PlusCircle, PlusCircleIcon } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -91,6 +91,7 @@ function AddProductCategoriesModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="sm" variant="default">
+          <PlusCircleIcon className="mr-1" />
           Add category
         </Button>
       </DialogTrigger>
@@ -179,7 +180,7 @@ function AddProductCategoriesModal() {
             </div>
             <DialogFooter>
               <Button type="submit">
-                <PlusSquare className="mr-2" />
+                <PlusCircle className="mr-1" />
                 Add
               </Button>
             </DialogFooter>

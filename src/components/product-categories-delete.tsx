@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deleteProductCategorySchema } from "@/types/form-schemas";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function DeleteProductCategory() {
@@ -51,7 +51,7 @@ function DeleteProductCategory() {
       <Dialog>
         <DialogTrigger asChild>
           <Button size="sm" variant="destructive">
-            Delete category
+            <Trash2 className="mr-1 " size={18} /> Delete category
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
@@ -89,7 +89,7 @@ function DeleteProductCategory() {
               />
               <DialogFooter>
                 <Button type="submit" variant="destructive">
-                  Delete <Trash />
+                  <Trash2 className="mr-1 " size={18} /> Delete
                 </Button>
               </DialogFooter>
             </form>
