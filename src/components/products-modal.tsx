@@ -6,13 +6,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
-import { PlusSquare } from "lucide-react";
-
+import { PlusCircle, PlusCircleIcon } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productsSchema } from "@/types/form-schemas";
 import {
@@ -32,7 +29,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-
 import { useGetProductCategories } from "@/actions/get-product-categories";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
@@ -57,14 +53,8 @@ function AddProductsModal() {
     await addProductsMutation(data)
       .then(() => {
         toast({
-          title: "You submitted the following values:",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-secondary">
-                {JSON.stringify(data, null, 2)}
-              </code>
-            </pre>
-          ),
+          variant: "default",
+          title: "Product added succesfully",
         });
       })
       .catch((error) => {
@@ -82,6 +72,7 @@ function AddProductsModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="sm" variant="default">
+          <PlusCircleIcon className="mr-1" />
           Add product
         </Button>
       </DialogTrigger>
@@ -160,7 +151,7 @@ function AddProductsModal() {
             </div>
             <DialogFooter>
               <Button type="submit">
-                <PlusSquare className="mr-2" />
+                <PlusCircle className="mr-1" />
                 Add
               </Button>
             </DialogFooter>

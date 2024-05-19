@@ -1,15 +1,17 @@
 import ProductCategoriesMenu from "@/components/product-categories-menu";
-import { useState } from "react";
 import Products from "@/components/products";
 
 function ProductsPage() {
-  const [searchInput, setSearchInput] = useState("");
-
   return (
-    <>
-      <ProductCategoriesMenu setSearchInput={setSearchInput} />
-      <Products />
-    </>
+    <main className="p-8">
+      <div className="space-y-0.5 pb-6">
+        <h2 className="text-3xl font-bold tracking-tight">Products</h2>
+      </div>
+      <div>
+        <ProductCategoriesMenu />
+        <Products />
+      </div>
+    </main>
   );
 }
 

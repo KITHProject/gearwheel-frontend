@@ -12,7 +12,5 @@ export const useGetProducts = () => {
     queryKey: ["products"],
     queryFn: queryFN,
     refetchOnWindowFocus: false,
-    retry: false,
-    enabled: true,
   });
 };
