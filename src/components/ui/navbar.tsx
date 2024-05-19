@@ -26,7 +26,7 @@ const navigationLinks = [
 
 function Navbar() {
   return (
-    <nav className="w-40">
+    <nav>
       {navigationLinks.map((link) => {
         return (
           <NavLink
@@ -34,11 +34,11 @@ function Navbar() {
             to={link.to}
             className={({ isActive }) =>
               isActive
-                ? "text-5xl md:text-2xl text-primary font-bold"
-                : "text-5xl md:text-2xl font-medium transition-colors text-zinc-500  hover:text-primary"
+                ? "text-4xl  lg:text-2xl text-primary font-bold"
+                : "text-4xl  lg:text-2xl font-medium transition-colors text-zinc-500  hover:text-primary"
             }
           >
-            <span className="flex items-center gap-2 pl-20 my-6 md:pl-0">
+            <span className="flex items-center gap-2 pl-20 my-6 lg:pl-0">
               {link.icon}
               {link.name}
             </span>

@@ -1,21 +1,19 @@
 import { Cog, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
-import { Separator } from "./ui/separator";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { useMediaQuery } from "usehooks-ts";
-import { Button } from "./ui/button";
 import { useState } from "react";
 
 export default function Sidebar() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [open, setOpen] = useState(false);
   if (isDesktop) {
     return (
       <div className="my-4 ml-4 mr-0 border shadow rounded-xl bg-primary-foreground">
-        <div className="flex flex-col px-1 py-2 mx-1">
+        <div className="flex flex-col py-2 md:px-4">
           <div>
-            <div className="flex items-center justify-center px-2">
+            <div className="flex items-center justify-center sm:px-2">
               <span className="flex items-center justify-center font-bold">
                 <Link
                   to="/"
@@ -28,7 +26,7 @@ export default function Sidebar() {
               </span>
             </div>
 
-            <div className="flex flex-col px-4 py-2 mt-2 space-y-4 font-medium md:gap-2">
+            <div className="flex flex-col px-2 py-2 mt-2 space-y-4 font-medium md:gap-2">
               <Navbar />
             </div>
           </div>
@@ -38,7 +36,7 @@ export default function Sidebar() {
   }
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger>
+      <DrawerTrigger className="absolute">
         <div className="absolute p-2 rounded-full left-6 top-6 z-1 hover:bg-zinc-300">
           <Menu />
         </div>
