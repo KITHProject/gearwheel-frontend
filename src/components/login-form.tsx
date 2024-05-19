@@ -11,15 +11,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { useState } from "react";
 import { loginFormSchema } from "@/types/form-schemas";
 import { Eye, EyeOff } from "lucide-react";
 import { login } from "@/actions/post-login";
 import { setAuthorized } from "@/stores/useAuthorizationStore";
 import { toast } from "./ui/use-toast";
-import LoadingSpinner from "./ui/loading-spinner";
+
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./ui/loading-spinner";
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,8 +31,8 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      username: "",
-      password: "",
+      username: "demo",
+      password: "demo12345",
     },
   });
 
@@ -54,7 +54,7 @@ export function LoginForm() {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: `There was a problem with your request (${error.message}).`,
+          description: `${error.response.data}`,
         });
       });
   }

@@ -1,5 +1,4 @@
 import { AuthorizationStoreState } from "@/types/authorization.types";
-import { useNavigate } from "react-router-dom";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 

@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Cog } from "lucide-react";
+import { Cog } from "lucide-react";
 import { RegisterForm } from "./register-form";
 import { Link } from "react-router-dom";
 import { Separator } from "./ui/separator";
