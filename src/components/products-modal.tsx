@@ -48,6 +48,12 @@ function AddProductsModal() {
 
   const form = useForm<z.infer<typeof productsSchema>>({
     resolver: zodResolver(productsSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      price: "",
+      category: "",
+    },
   });
   async function onSubmit(data: z.infer<typeof productsSchema>) {
     await addProductsMutation(data)
@@ -55,13 +61,16 @@ function AddProductsModal() {
         toast({
           variant: "default",
           title: "Product added succesfully",
+          description: `Product name: ${data.title}`,
         });
       })
       .catch((error) => {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: `There was a problem with your request (${error.message}).`,
+          description: `${Object.keys(error.response.data).map(
+            (key) => ` ${key}: ${error.response.data[key]}`
+          )}`,
         });
       });
 
@@ -71,7 +80,7 @@ function AddProductsModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="default">
+        <Button className="w-full sm:w-auto" variant="default">
           <PlusCircleIcon className="mr-1" />
           Add product
         </Button>
@@ -90,7 +99,7 @@ function AddProductsModal() {
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Title" {...field} />
+                      <Input required placeholder="Title" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -102,7 +111,11 @@ function AddProductsModal() {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input placeholder="Describe product..." {...field} />
+                      <Input
+                        required
+                        placeholder="Describe product..."
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -115,7 +128,7 @@ function AddProductsModal() {
                   <FormItem>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <Input type="number" {...field} />
+                      <Input required type="number" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -126,7 +139,11 @@ function AddProductsModal() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      required
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a category" />

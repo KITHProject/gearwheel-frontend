@@ -7,10 +7,8 @@ function ProductsPage() {
       <div className="space-y-0.5 pb-6">
         <h2 className="text-3xl font-bold tracking-tight">Products</h2>
       </div>
-      <div>
-        <ProductCategoriesMenu />
-        <Products />
-      </div>
+      <ProductCategoriesMenu />
+      <Products />
     </main>
   );
 }
