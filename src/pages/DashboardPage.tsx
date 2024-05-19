@@ -10,7 +10,6 @@ import { Dashboard } from "@/components/dashboard";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { useGetDashboard } from "@/actions/get-dashboard";
 import { toast } from "@/components/ui/use-toast";
-import LoadingSpinner from "@/components/ui/loading-spinner";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function DashboardPage() {
@@ -20,8 +19,6 @@ export default function DashboardPage() {
     error: errorDashboard,
   } = useGetDashboard();
 
-  console.log(dashboardData);
-
   if (errorDashboard) {
     toast({
       variant: "destructive",
@@ -30,15 +27,19 @@ export default function DashboardPage() {
     });
   }
   return (
-    <>
-      <div className="flex flex-col items-center justify-between gap-2 my-2 md:flex-row">
+    <main className="p-8">
+      <div className="pb-3 ">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <p className="text-muted-foreground">
+          All values are generated randomly each time after a refresh.
+        </p>
         <div className="flex items-center gap-2">
-          <CalendarDateRangePicker />
+          {/* <CalendarDateRangePicker /> */}
         </div>
       </div>
-      <div className="flex flex-col w-full min-h-screen">
-        <main className="flex flex-col flex-1 gap-4 p-4 md:gap-8 md:p-8">
+
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col flex-1 gap-4 p-2">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
@@ -61,49 +62,14 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="text-2xl font-bold">
                   {isLoadingDashboard ? (
-                    <LoadingSpinner />
+                    <Skeleton className="w-1/2 h-[30px] rounded" />
                   ) : (
                     <>${dashboardData.total_revenue}</>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  +20.1% from last month
-                </p>
               </CardContent>
             </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                <CardTitle className="text-sm font-medium">
-                  Subscriptions
-                </CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-4 h-4 text-muted-foreground"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  {isLoadingDashboard ? (
-                    <LoadingSpinner />
-                  ) : (
-                    <>${dashboardData.total_revenue}</>
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  +180.1% from last month
-                </p>
-              </CardContent>
-            </Card>
+
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">Sales</CardTitle>
@@ -123,41 +89,12 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {" "}
                   {isLoadingDashboard ? (
-                    <LoadingSpinner />
+                    <Skeleton className="w-1/2 h-[30px] rounded" />
                   ) : (
-                    <>${dashboardData.sales}</>
+                    <>{dashboardData.sales}</>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  +19% from last month
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                <CardTitle className="text-sm font-medium">
-                  Active Now
-                </CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-4 h-4 text-muted-foreground"
-                >
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                </svg>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">+573</div>
-                <p className="text-xs text-muted-foreground">
-                  +201 since last hour
-                </p>
               </CardContent>
             </Card>
           </div>
@@ -166,9 +103,9 @@ export default function DashboardPage() {
               <CardHeader>
                 <CardTitle>Overview</CardTitle>
               </CardHeader>
-              <CardContent className="pl-2 mb-4">
+              <CardContent className="mb-4 ">
                 {isLoadingDashboard ? (
-                  <LoadingSpinner />
+                  <Skeleton className="w-full h-[350px] rounded" />
                 ) : (
                   <Dashboard data={dashboardData.last_months} />
                 )}
@@ -178,13 +115,13 @@ export default function DashboardPage() {
               <CardHeader>
                 <CardTitle>Recent Sales</CardTitle>
                 <CardDescription>
-                  You made {dashboardData?.recent_sales.length} sales this
+                  {dashboardData?.recent_sales.length} people made sales this
                   month.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 {isLoadingDashboard ? (
-                  <Skeleton />
+                  <Skeleton className="w-full h-[350px] rounded" />
                 ) : (
                   <>
                     <div className="space-y-8 overflow-auto h-80">
@@ -195,8 +132,8 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        </div>
       </div>
-    </>
+    </main>
   );
 }
