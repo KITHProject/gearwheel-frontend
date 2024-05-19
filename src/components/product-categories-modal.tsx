@@ -66,21 +66,18 @@ function AddProductCategoriesModal() {
     await addCategoriesMutation(data)
       .then(() => {
         toast({
-          title: "You submitted the following values:",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-secondary">
-                {JSON.stringify(data, null, 2)}
-              </code>
-            </pre>
-          ),
+          variant: "default",
+          title: "Category added succesfully",
+          description: `Category name: ${data.title}`,
         });
       })
       .catch((error) => {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: `There was a problem with your request (${error.message}).`,
+          description: `There was a problem with your request:
+          ${error.respons.data}
+          `,
         });
       });
 
@@ -90,7 +87,7 @@ function AddProductCategoriesModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="default">
+        <Button className="w-full sm:w-auto" variant="default">
           <PlusCircleIcon className="mr-1" />
           Add category
         </Button>
@@ -148,35 +145,41 @@ function AddProductCategoriesModal() {
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name="parent_category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Parent Category</FormLabel>
-                    <Select onValueChange={field.onChange}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {productsCategoriesData.map((category: any) => {
-                          return (
-                            <SelectItem
-                              key={category.title}
-                              value={category.id.toString()}
-                            >
-                              {category.title}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
+              {form.getFieldState("primary").isDirty ? (
+                <>
+                  {" "}
+                  <FormField
+                    control={form.control}
+                    name="parent_category"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Parent Category</FormLabel>
+                        <Select onValueChange={field.onChange}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a category" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {productsCategoriesData.map((category: any) => {
+                              return (
+                                <SelectItem
+                                  key={category.title}
+                                  value={category.id.toString()}
+                                >
+                                  {category.title}
+                                </SelectItem>
+                              );
+                            })}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                </>
+              ) : (
+                <></>
+              )}
             </div>
             <DialogFooter>
               <Button type="submit">

@@ -14,5 +14,6 @@ export const useGetProductCategoriesMenu = () => {
     refetchOnWindowFocus: false,
     retry: false,
     enabled: true,
+    placeholderData: [],
   });
 };

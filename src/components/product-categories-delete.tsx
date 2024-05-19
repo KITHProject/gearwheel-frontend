@@ -24,8 +24,12 @@ import { deleteProductCategorySchema } from "@/types/form-schemas";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Trash2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "./ui/use-toast";
+import { useState } from "react";
 
 function DeleteProductCategory() {
+  const [open, setOpen] = useState(false);
+
   const { data: productsCategoriesData } = useGetProductCategories();
   const queryClient = useQueryClient();
 
@@ -37,20 +41,36 @@ function DeleteProductCategory() {
   });
 
   const handleDeleteCategories = (id: string) => {
-    deleteProductCategoriesMutation(parseInt(id));
+    deleteProductCategoriesMutation(parseInt(id))
+      .then(() => {
+        toast({
+          variant: "default",
+          title: "Category succesfully deleted",
+          description: `Category ID: ${id}`,
+        });
+      })
+      .catch((error) => {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `${error.response.data.error}`,
+        });
+      });
   };
 
   const form = useForm<z.infer<typeof deleteProductCategorySchema>>({
     resolver: zodResolver(deleteProductCategorySchema),
   });
+
   async function onSubmit(data: z.infer<typeof deleteProductCategorySchema>) {
     handleDeleteCategories(data.id);
+    setOpen(false);
   }
   return (
     <>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size="sm" variant="destructive">
+          <Button className="w-full sm:w-auto" variant="destructive">
             <Trash2 className="mr-1 " size={18} /> Delete category
           </Button>
         </DialogTrigger>
@@ -65,7 +85,7 @@ function DeleteProductCategory() {
                 name="id"
                 render={({ field }) => (
                   <FormItem>
-                    <Select onValueChange={field.onChange}>
+                    <Select onValueChange={field.onChange} required>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a category" />
