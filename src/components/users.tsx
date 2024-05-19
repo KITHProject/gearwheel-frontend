@@ -9,7 +9,6 @@ function Users() {
     data: usersData,
     isLoading: isLoadingUsers,
     error: errorUsers,
-    refetch: refetchUsers,
   } = useGetUsers();
 
   if (errorUsers) {
@@ -20,13 +19,11 @@ function Users() {
     });
   }
   return (
-    <div className="p-4 mx-auto overflow-auto max-w-7xl">
+    <div className="mx-auto overflow-auto max-w-7xl">
       {isLoadingUsers ? (
-        <div className="flex flex-col items-center justify-center gap-2">
-          <Skeleton className="w-full h-[20px] rounded-full" />
-          <Skeleton className="w-full h-[20px] rounded-full" />
-          <Skeleton className="w-full h-[20px] rounded-full" />
-          <Skeleton className="w-full h-[20px] rounded-full" />
+        <div className="flex flex-col items-start justify-center gap-2">
+          <Skeleton className="w-full max-w-sm h-[40px] rounded" />
+          <Skeleton className="w-full h-[250px] rounded" />
         </div>
       ) : (
         <DataTable columns={usersColumns} data={usersData} filter="email" />
